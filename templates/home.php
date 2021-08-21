@@ -1,4 +1,4 @@
-    <div class="homeContent">
+    <div class="content">
         <img id="imgLogo" src="images/logo.png" alt="">
         <br>
         <a href="#" class="square_btn">MULAI</a>

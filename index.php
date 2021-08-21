@@ -12,7 +12,7 @@
     } else {
       switch($_GET['content']) {
         case 'home' :  require_once("templates/home.php"); break;
-        case 'matpel' :  require_once("templates/home.php"); break;
+        case 'matpel' :  require_once("templates/matpel.php"); break;
         default:  require_once("templates/home.php");
       }
     } 
