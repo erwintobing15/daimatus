@@ -12,10 +12,10 @@
         <div class="collapse navbar-collapse" id="navbarTogglerClient">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#" style="color: #fff;">Home</a>
+              <a class="nav-link" aria-current="page" href="?content=home" style="color: #fff;">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" style="color: #fff;">Mata Pelajaran</a>
+              <a class="nav-link" href="?content=matpel" style="color: #fff;">Mata Pelajaran</a>
             </li>
           </ul>
         </div>
