@@ -31,3 +31,43 @@ body{
    line-height: 27px;
  }
 }
+
+/* Button style */
+.square_btn {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: #009fe1;
+  border: solid 2px #009fe1;
+  border-radius: 3px;
+  transition: .4s;
+}
+
+.square_btn:hover {
+  background: #009fe1;
+  color: white;
+}
+
+/*
+  style for home content
+  ref : #54 to #73
+*/
+
+/* Center content vertically and horizontally */
+.homeContent {
+  text-align: center;
+  margin-top: 150px;
+}
+
+/* Logo image size for devices smaller than 400px: */
+#imgLogo {
+  width: 85%;
+}
+
+/* Logo image size for devices 400px and larger: */
+@media (min-width: 768px) {
+  #imgLogo {
+    width: 35%;
+  }
+}
