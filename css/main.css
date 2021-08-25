@@ -57,7 +57,7 @@ body{
 /* Center content vertically and horizontally */
 .content {
   text-align: center;
-  margin-top: 150px;
+  margin-top: 100px;
 }
 
 /* Logo image size for devices smaller than 400px: */
@@ -71,3 +71,12 @@ body{
     width: 35%;
   }
 }
+
+/* 
+  style for matpel content
+  ref : #75 to #82
+ */
+
+ .card {
+   margin: 5px;
+ }

@@ -6,7 +6,6 @@
     require_once("templates/navbar.php");
 
     // website content
-    $content = '';
     if (!isset($_GET['content'])) {
       require_once("templates/home.php");
     } else {
