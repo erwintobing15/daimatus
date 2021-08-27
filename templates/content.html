@@ -1,0 +1,13 @@
+<?php
+
+  if (!isset($_GET['content'])) {
+    require_once(TEMPLATES_PATH . "/home.html");
+  } else {
+    switch($_GET['content']) {
+      case 'home' :  require_once(TEMPLATES_PATH . "/home.html"); break;
+      case 'matpel' :  require_once(TEMPLATES_PATH . "/matpel.html"); break;
+      default:  require_once(TEMPLATES_PATH . "/home.html");
+    }
+  }
+
+?>
