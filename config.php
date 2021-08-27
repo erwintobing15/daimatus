@@ -22,9 +22,6 @@
     defined ('ADMIN_IMAGES_PATH')
       or define('ADMIN_IMAGES_PATH', '../admin/images');
 
-    defined ('ADMIN_CSS_PATH')
-      or define('ADMIN_CSS_PATH', '/admin/css');
-
     defined ('ADMIN_TEMPLATES_PATH')
       or define('ADMIN_TEMPLATES_PATH', realpath(dirname(__FILE__) . '/admin/templates'));
 
