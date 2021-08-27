@@ -7,14 +7,14 @@
 ?>
 <div>
   <center><h2>Daftar Pengguna</h2></center>
-  <!-- btn add new user -->
+  <!-- add new user -->
   <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
   data-bs-target="#add-user" style="margin-bottom: 10px;">Tambah User</button>
-  <div class="modal fade" id="add-user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="add-user" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Tambah User Baru</h5>
+          <h5 class="modal-title" id="addModalLabel">Tambah User Baru</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -36,7 +36,6 @@
             </div>
             <div style="float: right;">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
-              <!-- <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" name="addUser">Tambah</button> -->
               <input type="submit" name="addUser"  class="btn btn-primary" value="Tambah">
             </div>
           </form>
@@ -44,7 +43,7 @@
       </div>
     </div>
   </div>
-  <!-- display user table -->
+  <!-- display user list -->
   <table class="table table-bordered">
     <thead class="table-primary">
       <tr>
@@ -67,10 +66,76 @@
               $counter += 1;
             ?>
             <td><?php echo $super ?></td>
-            <td>
-              <button type="button" class="btn btn-success btn-sm">Ubah</button>
-              <button type="button" class="btn btn-danger btn-sm">Hapus</button>
-            </td>
+            <form action="../admin/library/user-action.php" method="post">
+              <input type="hidden" name="userId" value="<?php echo $row['id'] ?>"/>
+              <td>
+                <!-- Update user -->
+                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#update-user">Ubah</button>
+                <div class="modal fade" id="update-user" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="updateModalLabel">Update User</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="../admin/library/user-action.php" method="post">
+                          <div class="mb-3">
+                            <label for="username" class="col-form-label">Username:</label>
+                            <input type="text" class="form-control" id="username" name="username"
+                             value="<?php echo $row['username']; ?>">
+                          </div>
+                          <div class="mb-3">
+                            <label for="password" class="col-form-label">Password:</label>
+                            <input type="password" class="form-control" id="password" name="password" value="">
+                          </div>
+                          <div class="mb-3">
+                            <label for="super" class="col-form-label">Super:</label>
+                            <select name="super" id="super" class="form-select" aria-label=".form-select-sm example">
+                              <?php
+                                if ($super == 'Ya') {
+                                  echo '<option value="1" selected>Ya</option>';
+                                  echo '<option value="0">Tidak</option>';
+                                }
+                                else {
+                                  echo '<option value="1">Ya</option>';
+                                  echo '<option value="0" selected>Tidak</option>';
+                                }
+                              ?>
+                            </select>
+                          </div>
+                          <div style="float: right;">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
+                            <input type="submit" name="updateUser"  class="btn btn-primary" value="Ubah">
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Delete user-->
+                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete-user">
+                  Hapus
+                </button>
+                <div class="modal fade" id="delete-user" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Apakah anda yakin menghapus user ini?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        User yang telah dihapus tidak akan bisa dikembalikan.
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                        <input type="submit" name="delUser"  class="btn btn-primary" value="Ya">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </form>
           </tr>
       <?php
         }

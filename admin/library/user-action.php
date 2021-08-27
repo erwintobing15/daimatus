@@ -18,4 +18,14 @@
     die;
   }
 
+  // delete user
+  if (isset($_POST['delUser'])) {
+    $userId = $_POST['userId'];
+
+    $message = $user->delUser($userId);
+
+    header("Location: ../?content=user");
+    die;
+  }
+
 ?>
