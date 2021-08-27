@@ -34,7 +34,6 @@ body{
 }
 
 .wrapper .sidebar ul li{
-  padding: 15px;
   border-bottom: 1px solid #bdb8d7;
   border-bottom: 1px solid rgba(0,0,0,0.05);
   border-top: 1px solid rgba(255,255,255,0.05);
@@ -43,10 +42,7 @@ body{
 .wrapper .sidebar ul li a{
   color: #fff;
   display: block;
-}
-
-.wrapper .sidebar ul li a .fas{
-  width: 25px;
+  padding: 15px;
 }
 
 .wrapper .sidebar ul li:hover{
