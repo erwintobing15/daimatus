@@ -28,5 +28,8 @@
     defined ('ADMIN_TEMPLATES_PATH')
       or define('ADMIN_TEMPLATES_PATH', realpath(dirname(__FILE__) . '/admin/templates'));
 
+    defined ('ADMIN_LIBRARY_PATH')
+      or define('ADMIN_LIBRARY_PATH', realpath(dirname(__FILE__) . '/admin/library'));
+
 
 ?>

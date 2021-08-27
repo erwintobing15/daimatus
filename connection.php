@@ -1,7 +1,7 @@
 <?php
 
-  class DbConnection {
-
+  class DbConnection
+  {
       private $conn;
       private $DB_HOST;
       private $DB_USERNAME;
@@ -25,7 +25,6 @@
 
   	    return $this->conn;
   	}
-
   }
 
 ?>
