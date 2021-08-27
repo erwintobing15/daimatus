@@ -6,8 +6,9 @@
     header("Location: login.php");
   }
 
-  /* load config */
+  /* load config and connection*/
   require_once('../config.php');
+  require_once('../connection.php');
 
   /* load admin web header */
   require_once(ADMIN_TEMPLATES_PATH . '/header.php');
