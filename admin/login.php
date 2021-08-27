@@ -12,16 +12,16 @@
   </head>
   <body>
     <div class="login-form">
-      <form>
+      <form action="../admin/library/action-login.php" method="post">
         <div class="mb-3">
           <label for="username" class="form-label">Username</label>
-          <input type="text" class="form-control" id="username">
+          <input type="text" class="form-control" id="username" name="username">
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password">
+          <input type="password" class="form-control" id="password" name="password">
         </div>
-        <button type="submit" class="square_btn">Login</button>
+        <input type="submit" class="square_btn" name="" value="Login">
       </form>
     </div>
   </body>

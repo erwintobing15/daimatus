@@ -1,5 +1,11 @@
 <?php
 
+  /* redirect to login page if user not login yet  */
+  session_start();
+  if (!isset($_SESSION['username'])){
+    header("Location: login.php");
+  }
+
   /* load config */
   include_once('../config.php');
 
