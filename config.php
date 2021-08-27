@@ -8,6 +8,8 @@
         'name' => 'daimatus',
     );
 
+    $url = "http://localhost/daimatus/";
+
     /* define global path directory for client web*/
     defined ('ROOT_PATH')
       or define('ROOT_PATH', realpath(dirname(__FILE__)));
