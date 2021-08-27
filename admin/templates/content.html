@@ -1,0 +1,20 @@
+<div class="main_content">
+    <div class="header">
+        <p id="left-header">Selamat datang dihalaman panel admin!!</p>
+        <a href="library/logout.php" id="right-header"><i class="fa fa-sign-out"
+          style="font-size:18px;color:#009fe1;">Logout</i></a>
+    </div>
+    <div class="info">
+      <?php
+        if (!isset($_GET['content'])) {
+          require_once(ADMIN_TEMPLATES_PATH . "/home.html");
+        } else {
+          switch($_GET['content']) {
+            case 'home' :  require_once(ADMIN_TEMPLATES_PATH . "/home.html"); break;
+            case 'user' :  require_once(ADMIN_TEMPLATES_PATH . '/user.html'); break;
+            default:  require_once(ADMIN_TEMPLATES_PATH . "/home.html");
+          }
+        }
+      ?>
+    </div>
+</div>
