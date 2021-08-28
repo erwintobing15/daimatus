@@ -6,7 +6,7 @@
   $result = $user->getUsers();
 ?>
 <div>
-  
+
   <center><h2>Daftar Pengguna</h2></center>
   <!-- add new user -->
   <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"data-bs-target="#add-user"
@@ -22,17 +22,17 @@
           <form action="../admin/library/userAction.php" method="post">
             <div class="mb-3">
               <label for="username-add" class="col-form-label">Username:</label>
-              <input type="text" class="form-control" id="username-add" name="username-add" value="">
+              <input type="text" class="form-control" id="username-add" name="username-add" value="" required>
             </div>
             <div class="mb-3">
               <label for="password-add" class="col-form-label">Password:</label>
-              <input type="password" class="form-control" id="password-add" name="password-add" value="">
+              <input type="password" class="form-control" id="password-add" name="password-add" value="" required>
             </div>
             <div class="mb-3">
               <label for="super-add" class="col-form-label">Super:</label>
               <select name="super-add" id="super-add" class="form-select" aria-label=".form-select-sm example">
                 <option value="1">Ya</option>
-                <option value="0">Tidak</option>
+                <option value="0" selected>Tidak</option>
               </select>
             </div>
             <div style="float: right;">
@@ -84,17 +84,17 @@
                     <div class="modal-body">
                       <div class="mb-3">
                         <label for="username-update" class="col-form-label">Username:</label>
-                        <input type="text" class="form-control" id="username-update" name="username-update" value="username">
+                        <input type="text" class="form-control" id="username-update" name="username-update" value="username" required>
                       </div>
                       <div class="mb-3">
                         <label for="password-update" class="col-form-label">Password:</label>
-                        <input type="password" class="form-control" id="password-update" name="password-update" value="password">
+                        <input type="password" class="form-control" id="password-update" name="password-update" value="password" required>
                       </div>
                       <div class="mb-3">
                         <label for="super-update" class="col-form-label">Super:</label>
                         <select name="super-update" id="super-update" class="form-select" aria-label=".form-select-sm example">
                           <option value="1">Ya</option>
-                          <option value="0">Tidak</option>
+                          <option value="0" selected>Tidak</option>
                         </select>
                       </div>
                       <div style="float: right;">
