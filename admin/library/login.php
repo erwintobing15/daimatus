@@ -18,8 +18,11 @@
 
   // redirect to index page if ther is one or more row query result
   if ($result->num_rows > 0) {
-    session_start();
-    $_SESSION['username'] = $username;
+    while ($row = $result->fetch_assoc()) {
+      session_start();
+      $_SESSION['username'] = $row['username'];
+      $_SESSION['user_id'] = $row['user_id'];
+    }
     header("Location: ../index.php");
   }
   else {

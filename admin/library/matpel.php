@@ -25,8 +25,11 @@ class Matpel
 
   // database handler to add new matpel
   public function addMatpel($name,$img,$grade,$active,$file) {
-    $sql = "INSERT INTO matpel (name, img, grade, active)
-            VALUES ('".$name."', '".$img."', '".$grade."', '".$active."')";
+    // get user_id from session
+    session_start();
+    $userId = $_SESSION['user_id'];
+    $sql = "INSERT INTO matpel (name, img, grade, active, user_id)
+            VALUES ('".$name."', '".$img."', '".$grade."', '".$active."', '".$userId."')";
 
     if ($this->conn->query($sql) == TRUE) {
       // move uploaded file to image/matpel
