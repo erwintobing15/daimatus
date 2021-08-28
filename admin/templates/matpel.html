@@ -1,0 +1,46 @@
+<?php
+  require_once(ADMIN_LIBRARY_PATH . '/matpel.php');
+
+  $matpel = new Matpel($database['host'],$database['username'],$database['password'],$database['name']);
+
+  $result = $matpel->getMatpels();
+?>
+<div>
+  <center><h2>Daftar Mata Pelajaran</h2></center>
+  <!-- display user list in table -->
+  <table class="table table-bordered">
+    <thead class="table-primary">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Mata Pelajaran</th>
+        <th scope="col">Gambar</th>
+        <th scope="col">Kelas</th>
+        <th scope="col">Aktif</th>
+        <th scope="col">Tindakan</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      if ($result->num_rows > 0) {
+        $counter = 1;
+        while ($row = $result->fetch_assoc()) { ?>
+          <tr>
+            <th scope="row"><?php echo $counter; ?></th>
+            <td><?php echo $row["name"]; ?></td>
+            <td><img src="<?php echo (ADMIN_IMAGES_PATH.'/matpel/'.$row['img']); ?>"
+              class="rounded mx-auto d-block" alt="..." width="150"></td>
+            <td><?php echo $row['grade']; ?></td>
+            <td><?php echo $row['active']; ?></td>
+            <td>
+              <button type="button" name="button" class="btn btn-primary btn-sm">Ubah</button>
+              <button type="button" name="button" class="btn btn-danger btn-sm">Tambah</button>
+            </td>
+          </tr>
+      <?php
+        }
+      }
+      ?>
+    </tbody>
+  </table>
+
+</div>
