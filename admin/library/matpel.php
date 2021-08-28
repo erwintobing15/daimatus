@@ -22,6 +22,38 @@ class Matpel
 
     return $result;
   }
+
+  // database handler to add new matpel
+  public function addMatpel($name,$img,$grade,$active,$file) {
+    $sql = "INSERT INTO matpel (name, img, grade, active)
+            VALUES ('".$name."', '".$img."', '".$grade."', '".$active."')";
+
+    if ($this->conn->query($sql) == TRUE) {
+      // move uploaded file to image/matpel
+      move_uploaded_file($file, '../images/matpel/'.$img);
+      return "Berhasil menambah matpel baru!";
+    }
+    return FALSE;
+  }
+
+  // database handler to delete selected matpel
+  public function delMatpel($matpelId) {
+    // delete image file
+    $sql = "SELECT img FROM matpel WHERE matpel_id = '".$matpelId."'";
+    $result = $this->conn->query($sql);
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        unlink('../images/matpel/'.$row['img']);
+      }
+    }
+    // delete database row
+    $sql_ = "DELETE FROM matpel WHERE matpel_id = '".$matpelId."'";
+    if ($this->conn->query($sql_) == TRUE) {
+      return "Berhasil menghapus mata pelajaran!";
+    }
+    return FALSE;
+  }
+
 }
 
 ?>

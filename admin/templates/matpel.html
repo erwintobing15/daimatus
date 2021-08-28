@@ -7,6 +7,47 @@
 ?>
 <div>
   <center><h2>Daftar Mata Pelajaran</h2></center>
+  <!-- add new matpel -->
+  <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"data-bs-target="#add-matpel"
+  style="margin-bottom: 10px;" onclick="">Tambah Mata Pelajaran</button>
+  <div class="modal fade" id="add-matpel" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addModalLabel">Tambah Mata Pelajaran Baru</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="../admin/library/matpelAction.php" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+              <label for="name-add" class="col-form-label">Mata Pelajaran:</label>
+              <input type="text" class="form-control" id="name-add" name="name-add" value="">
+            </div>
+            <div class="mb-3">
+              <label for="img-add" class="col-form-label">Gambar:</label>
+              <input type="file" class="form-control" id="img-add" name="img-add" value="">
+              <small class="form-text text-muted">Upload gambar berukuran 500x500 pixel (png,jpg)</small>
+            </div>
+            <div class="mb-3">
+              <label for="grade-add" class="col-form-label">Kelas:</label>
+              <input type="text" class="form-control" id="grade-add" name="grade-add" value="">
+            </div>
+            <div class="mb-3">
+              <label for="active-add" class="col-form-label">Aktif:</label>
+              <select name="active-add" id="active-add" class="form-select" aria-label=".form-select-sm example">
+                <option value="1">Ya</option>
+                <option value="0">Tidak</option>
+              </select>
+            </div>
+            <div style="float: right;">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
+              <input type="submit" name="addMatpel"  class="btn btn-primary" value="Tambah">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- display user list in table -->
   <table class="table table-bordered">
     <thead class="table-primary">
@@ -32,8 +73,31 @@
             <td><?php echo $row['grade']; ?></td>
             <td><?php echo $row['active']; ?></td>
             <td>
-              <button type="button" name="button" class="btn btn-primary btn-sm">Ubah</button>
-              <button type="button" name="button" class="btn btn-danger btn-sm">Tambah</button>
+              <form class="" action="../admin/library/matpelAction.php " method="post" enctype="multipart/form-data">
+                <input type="hidden" name="matpelId" id="matpelId" value="">
+                <!-- Delete user-->
+                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                data-bs-target="#delete-matpel" onclick="passId(<?php echo $row['matpel_id']; ?>, 'matpelId');">
+                  Hapus
+                </button>
+                <div class="modal fade" id="delete-matpel" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Apakah anda yakin menghapus mata pelajaran ini?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Mata pelajaran yang telah dihapus tidak akan bisa dikembalikan.
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                        <input type="submit" name="delMatpel"  class="btn btn-primary" value="Ya">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
             </td>
           </tr>
       <?php
