@@ -1,14 +1,27 @@
+<?php
+  require_once(ADMIN_LIBRARY_PATH . '/matpel.php');
+
+  $matpel = new Matpel($database['host'],$database['username'],$database['password'],$database['name']);
+
+  $result = $matpel->getMatpels();
+?>
 <div class="container content">
   <div class="row">
-    <div class="col-12 col-md-3">
-      <div class="card" >
-        <img src="images/logo.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <a href="#" class="square_btn">Materi</a>
-          <a href="#" class="square_btn">Kuis</a>
+    <?php if ($result->num_rows > 0) { ?>
+      <?php while ($row = $result->fetch_assoc()) { ?>
+        <div class="col-12 col-md-3">
+          <div class="card" >
+            <img src="<?php echo 'admin/images/matpel/'.$row['img']; ?>" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><?php echo $row['name'] ?></h5>
+              <a href="#" class="square_btn">Materi</a>
+              <a href="#" class="square_btn">Kuis</a>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      <?php }?>
+    <?php } else { ?>
+      <h2>Mata pelajaran kosong.</h2>
+    <?php } ?>
   </div>
 </div>

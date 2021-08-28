@@ -1,6 +1,7 @@
 <?php
     // load config
     require_once("config.php");
+    require_once("connection.php");
 
     // load header
     require_once(TEMPLATES_PATH . "/header.html");
