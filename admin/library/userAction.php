@@ -8,14 +8,11 @@
 
   // add new user if there is a submit
   if (isset($_POST['addUser'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $super = $_POST['super'];
+    $username = $_POST['username-add'];
+    $password = $_POST['password-add'];
+    $super = $_POST['super-add'];
 
     $message = $user->addUser($username,md5($password),$super);
-
-    header("Location: ../?content=user");
-    die;
   }
 
   // delete user
@@ -23,9 +20,20 @@
     $userId = $_POST['userId'];
 
     $message = $user->delUser($userId);
-
-    header("Location: ../?content=user");
-    die;
   }
+
+  // update user
+  if (isset($_POST['updateUser'])) {
+    $userId = $_POST['userId'];
+
+    $username = $_POST['username-update'];
+    $password = $_POST['password-update'];
+    $super = $_POST['super-update'];
+
+    $message = $user->updateUser($userId,$username,md5($password),$super);
+  }
+
+  header("Location: ../?content=user");
+  die;
 
 ?>

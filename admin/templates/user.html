@@ -8,8 +8,8 @@
 <div>
   <center><h2>Daftar Pengguna</h2></center>
   <!-- add new user -->
-  <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-  data-bs-target="#add-user" style="margin-bottom: 10px;">Tambah User</button>
+  <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"data-bs-target="#add-user"
+  style="margin-bottom: 10px;" onclick="">Tambah User</button>
   <div class="modal fade" id="add-user" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -20,16 +20,16 @@
         <div class="modal-body">
           <form action="../admin/library/userAction.php" method="post">
             <div class="mb-3">
-              <label for="username" class="col-form-label">Username:</label>
-              <input type="text" class="form-control" id="username" name="username" value="">
+              <label for="username-add" class="col-form-label">Username:</label>
+              <input type="text" class="form-control" id="username-add" name="username-add" value="">
             </div>
             <div class="mb-3">
-              <label for="password" class="col-form-label">Password:</label>
-              <input type="password" class="form-control" id="password" name="password" value="">
+              <label for="password-add" class="col-form-label">Password:</label>
+              <input type="password" class="form-control" id="password-add" name="password-add" value="">
             </div>
             <div class="mb-3">
-              <label for="super" class="col-form-label">Super:</label>
-              <select name="super" id="super" class="form-select" aria-label=".form-select-sm example">
+              <label for="super-add" class="col-form-label">Super:</label>
+              <select name="super-add" id="super-add" class="form-select" aria-label=".form-select-sm example">
                 <option value="1">Ya</option>
                 <option value="0">Tidak</option>
               </select>
@@ -70,6 +70,40 @@
             <td>
               <!-- pass user id to input userId using javascript -->
               <input type="hidden" id="userId" name="userId"/>
+              <!-- Update user -->
+              <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"data-bs-target="#update-user"
+              onclick="passId(<?php echo $row['user_id']; ?>, 'userId')">Ubah</button>
+              <div class="modal fade" id="update-user" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="updateModalLabel">Ubah Data User</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="mb-3">
+                        <label for="username-update" class="col-form-label">Username:</label>
+                        <input type="text" class="form-control" id="username-update" name="username-update" value="username">
+                      </div>
+                      <div class="mb-3">
+                        <label for="password-update" class="col-form-label">Password:</label>
+                        <input type="password" class="form-control" id="password-update" name="password-update" value="password">
+                      </div>
+                      <div class="mb-3">
+                        <label for="super-update" class="col-form-label">Super:</label>
+                        <select name="super-update" id="super-update" class="form-select" aria-label=".form-select-sm example">
+                          <option value="1">Ya</option>
+                          <option value="0">Tidak</option>
+                        </select>
+                      </div>
+                      <div style="float: right;">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
+                        <input type="submit" name="updateUser"  class="btn btn-primary" value="Ubah">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <!-- Delete user-->
               <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
               data-bs-target="#delete-user" onclick="passId(<?php echo $row['user_id']; ?>, 'userId')">

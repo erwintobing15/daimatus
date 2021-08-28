@@ -43,7 +43,19 @@ class User
     }
     return FALSE;
   }
+
+  // database handler to update selected user
+  public function updateUser($userId,$username,$password,$super) {
+    $sql = "UPDATE user
+            SET username      = '".$username."',
+                password       = '".$password."',
+                super        = '".$super."'
+            WHERE user_id = '".$userId."'";
+    if ($this->conn->query($sql) == TRUE) {
+      return "Berhasil mengubah data user!";
+    }
+    return FALSE;
+  }
 }
 
-
- ?>
+?>
