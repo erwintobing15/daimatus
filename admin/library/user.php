@@ -17,7 +17,7 @@ class User
 
   // database handler to get all user
   public function getUsers() {
-    $sql = "SELECT id, username, super FROM user";
+    $sql = "SELECT user_id, username, super FROM user";
     $result = $this->conn->query($sql);
 
     return $result;
@@ -36,7 +36,7 @@ class User
 
   // database handler to delete selected user
   public function delUser($userId) {
-    $sql = "DELETE FROM user WHERE id = '".$userId."'";
+    $sql = "DELETE FROM user WHERE user_id = '".$userId."'";
 
     if ($this->conn->query($sql) == TRUE) {
       return "Berhasil menghapus user!";

@@ -43,7 +43,7 @@
       </div>
     </div>
   </div>
-  <!-- display user list -->
+  <!-- display user list in table -->
   <table class="table table-bordered">
     <thead class="table-primary">
       <tr>
@@ -67,7 +67,7 @@
             ?>
             <td><?php echo $super ?></td>
             <form action="../admin/library/user-action.php" method="post">
-              <input type="hidden" name="userId" value="<?php echo $row['id'] ?>"/>
+              <input type="hidden" name="userId" value="<?php echo $row['user_id'] ?>"/>
               <td>
                 <!-- Update user -->
                 <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#update-user">Ubah</button>
