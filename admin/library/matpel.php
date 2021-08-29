@@ -57,6 +57,31 @@ class Matpel
     return FALSE;
   }
 
+  // database handler to update selected matpel
+  public function updateMatpel($matpelId,$name,$img,$grade,$active,$file) {
+    // delete old image
+    $sql = "SELECT img FROM matpel WHERE matpel_id = '".$matpelId."'";
+    $result = $this->conn->query($sql);
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+        unlink('../images/matpel/'.$row['img']);
+      }
+    }
+    // update matpel
+    $sql_ = "UPDATE matpel
+             SET name      = '".$name."',
+                 img       = '".$img."',
+                 grade       = '".$grade."',
+                 active        = '".$active."'
+             WHERE matpel_id = '".$matpelId."'";
+    if ($this->conn->query($sql_) == TRUE) {
+      // upload new image
+      move_uploaded_file($file, '../images/matpel/'.$img);
+      return "Berhasil mengubah data mata pelajaran!";
+    }
+    return FALSE;
+  }
+
 }
 
 ?>

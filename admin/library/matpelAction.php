@@ -20,9 +20,21 @@ if (isset($_POST['addMatpel'])) {
 }
 
 if (isset($_POST['delMatpel'])) {
-  $matpelId = $_POST['matpelId'];
+  $matpelId = $_POST['_matpelId'];
 
   $message = $matpel->delMatpel($matpelId);
+}
+
+if (isset($_POST['updateMatpel'])) {
+
+  $matpelId = $_POST['matpelId'];
+  $name = $_POST['name-update'];
+  $img = $_FILES['img-update']['name'];          // get image name
+  $file = $_FILES['img-update']['tmp_name'];     // get image file
+  $grade = strtoupper($_POST['grade-update']);   // change grade to uppercase
+  $active = $_POST['active-update'];
+
+  $message = $matpel->updateMatpel($matpelId,$name,$img,$grade,$active,$file);
 }
 
 // redirect to matpel page
