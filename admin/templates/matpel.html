@@ -25,8 +25,9 @@
             </div>
             <div class="mb-3">
               <label for="img-add" class="col-form-label">Gambar:</label>
-              <input type="file" class="form-control" id="img-add" name="img-add" value="" required>
-              <small class="form-text text-muted">Upload gambar berukuran 500x500 pixel (png,jpg)</small>
+              <input type="file" class="form-control" id="img-add" name="img-add"
+              accept="image/x-png,image/gif,image/jpeg" required>
+              <small class="form-text text-muted">Upload gambar berukuran 500x500 pixel (png,jpg,gif)</small>
             </div>
             <div class="mb-3">
               <label for="grade-add" class="col-form-label">Kelas:</label>
@@ -48,6 +49,14 @@
       </div>
     </div>
   </div>
+  <!-- alert message -->
+  <?php if (isset($_SESSION["warning"]) and $_SESSION['warning'] != "") { ?>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <?php echo $_SESSION["warning"]; ?>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <?php $_SESSION["warning"] = ""; ?>
+  <?php }?>
   <!-- display user list in table -->
   <table class="table table-bordered">
     <thead class="table-primary">
@@ -72,7 +81,8 @@
             <td><img src="<?php echo (ADMIN_IMAGES_PATH.'/matpel/'.$row['img']); ?>"
               class="rounded mx-auto d-block" alt="..." width="150"></td>
             <td><?php echo $row['grade']; ?></td>
-            <td><?php echo $row['active']; ?></td>
+            <?php $active = ($row['active'] == '1' ? 'Ya' : 'Tidak'); ?>
+            <td><?php echo $active; ?></td>
             <td>
             <form action="../admin/library/matpelAction.php" method="post" enctype="multipart/form-data">
                 <!-- matpel_id input named matpelId for update function -->
@@ -94,8 +104,9 @@
                         </div>
                         <div class="mb-3">
                           <label for="img-update" class="col-form-label">Gambar:</label>
-                          <input type="file" class="form-control" id="img-update" name="img-update" value="" required>
-                          <small class="form-text text-muted">Upload gambar berukuran 500x500 pixel (png,jpg)</small>
+                          <input type="file" class="form-control" id="img-update" name="img-update"
+                          accept="image/x-png,image/gif,image/jpeg" required>
+                          <small class="form-text text-muted">Upload gambar berukuran 500x500 pixel (png,jpg,gif)</small>
                         </div>
                         <div class="mb-3">
                           <label for="grade-update" class="col-form-label">Kelas:</label>

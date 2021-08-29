@@ -30,9 +30,15 @@ class Matpel
     $userId = $_SESSION['user_id'];
     $sql = "INSERT INTO matpel (name, img, grade, active, user_id)
             VALUES ('".$name."', '".$img."', '".$grade."', '".$active."', '".$userId."')";
-
+    // check if image size is 500x500px
+    list($width, $height, $type, $attr) = getimagesize($file);
+    if ($width != 500 or $height != 500) {
+      session_start();
+      $_SESSION["warning"] = "Ukuran gambar harus 500x500 pixel, silahkan coba kembali!";
+      return FALSE;
+    }
+    // add new matkul to database and move uploaded file to image/matpel
     if ($this->conn->query($sql) == TRUE) {
-      // move uploaded file to image/matpel
       move_uploaded_file($file, '../images/matpel/'.$img);
       return "Berhasil menambah matpel baru!";
     }
@@ -66,6 +72,13 @@ class Matpel
       while ($row = $result->fetch_assoc()) {
         unlink('../images/matpel/'.$row['img']);
       }
+    }
+    // check if image size is 500x500px
+    list($width, $height, $type, $attr) = getimagesize($file);
+    if ($width != 500 or $height != 500) {
+      session_start();
+      $_SESSION["warning"] = "Ukuran gambar harus 500x500 pixel, silahkan coba kembali!";
+      return FALSE;
     }
     // update matpel
     $sql_ = "UPDATE matpel
