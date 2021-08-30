@@ -1,6 +1,44 @@
+<?php
+  require_once(ADMIN_LIBRARY_PATH . '/matpel.php');
+  require_once(ADMIN_LIBRARY_PATH . '/topic.php');
+
+  $matpel = new Matpel($database['host'],$database['username'],$database['password'],$database['name']);
+  $resultMatpel = $matpel->getMatpels();
+
+  if (isset($_POST['displayTopic'])) {
+    $matpelId = $_POST['matpelId'];
+    $topic = new Topic($database['host'],$database['username'],$database['password'],$database['name']);
+    $resultTopic = $topic->getTopicByMatpel($matpelId );
+  }
+?>
 <div>
   <center><h2>Daftar Topik Pelajaran</h2></center>
-
+  <!-- add new user -->
+  <div style="float: right;">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#add-user"
+    onclick="">Tambah Topik</button>
+  </div>
+  <!-- button to select topic to display by matpel name -->
+  <form action="" method="post">
+    <div class="row">
+      <div class="col-auto">
+        <select name="matpelId" class="form-select form-sm">
+          <?php if ($resultMatpel->num_rows > 0) { ?>
+            <?php while ($row = $resultMatpel->fetch_assoc()) { ?>
+              <?php if ($row['matpel_id'] == $matpelId) { ?>
+                <option value="<?php echo $row['matpel_id']; ?>" selected><?php echo $row['name']; ?></option>
+              <?php } else { ?>
+                <option value="<?php echo $row['matpel_id']; ?>"><?php echo $row['name']; ?></option>
+              <?php } ?>
+            <?php } ?>
+          <?php }?>
+        </select>
+      </div>
+      <div class="col-auto">
+        <input type="submit" name="displayTopic" class="btn btn-success" value="Tampilkan">
+      </div>
+    </div>
+  </form>
   <!-- display topic list in a table -->
   <table class="table table-bordered">
     <thead class="table-primary">
@@ -11,16 +49,28 @@
       </tr>
     </thead>
     <tbody>
-      <?php if (!isset($topicList)) { ?>
+      <?php if (!isset($resultTopic)) { ?>
         <tr>
           <td>Silahkan pilih mata pelajaran dan tekan tombol tampilkan untuk menampilkan daftar topik</td>
         </tr>
-      <?php }?>
-      <!-- <tr>
-        <td scope="row">1</td>
-        <td>123</td>
-        <td>321</td>
-      </tr> -->
+      <?php } else { ?>
+        <?php if ($resultTopic->num_rows > 0) { ?>
+          <?php $counter = 1; ?>
+          <?php while ($row = $resultTopic->fetch_assoc()) { ?>
+            <tr>
+              <td scope="row"><?php echo $counter; ?></td>
+              <td><?php echo $row['topic_name']; ?></td>
+              <td>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#add-user"
+                onclick="">Ubah</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#add-user"
+                onclick="">Hapus</button>
+              </td>
+            </tr>
+            <?php $counter += 1; ?>
+          <?php } ?>
+        <?php }?>
+      <?php } ?>
     </tbody>
   </table>
 </div>
