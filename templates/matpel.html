@@ -14,7 +14,7 @@
             <img src="<?php echo 'admin/images/matpel/'.$row['img']; ?>" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title"><?php echo $row['name'] ?></h5>
-              <a href="#" class="square_btn">Materi</a>
+              <a href="?content=topic&matpel=<?php echo $row['matpel_id']; ?>" class="square_btn">Materi</a>
               <a href="#" class="square_btn">Kuis</a>
             </div>
           </div>

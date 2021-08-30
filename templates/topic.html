@@ -1,0 +1,34 @@
+<?php
+  require_once(ADMIN_LIBRARY_PATH . '/matpel.php');
+
+  $matpel = new Matpel($database['host'],$database['username'],$database['password'],$database['name']);
+
+  $result = $matpel->getMatpels();
+?>
+
+
+<div id="materiList" class="container">
+  <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="?content=matpel">Mata Pelajaran</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Materi</li>
+    </ol>
+  </nav>
+
+  <h6>Daftar Materi Mata Pelajaran Matematika</h6>
+
+  <div class="topic">
+    BAB 1 PECAHAN
+  </div>
+  <div class="subTopic">
+    <ul>
+      <li>
+        <a href="?content=materi&subTopic=Menjelaskan dan mengidentifikasi pecahan-pecahan senilai dengan gambar dan model konkret">
+          Menjelaskan dan mengidentifikasi pecahan-pecahan senilai dengan gambar dan model konkret
+        </a><br>
+        <p class="subTopicContext">video 4 menit</p>
+      </li>
+    </ul>
+  </div>
+
+</div>
