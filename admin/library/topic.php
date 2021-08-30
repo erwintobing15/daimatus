@@ -15,6 +15,14 @@ class Topic
     $this->conn = $db->connect();
   }
 
+  // database handler to get all topics
+  public function getTopics() {
+    $sql = "SELECT * FROM topic";
+    $result = $this->conn->query($sql);
+
+    return $result;
+  }
+
   // database handler to get topic by matpel_id
   public function getTopicByMatpel($matpelId) {
     $sql = "SELECT * FROM topic WHERE matpel_id = '".$matpelId."'";
