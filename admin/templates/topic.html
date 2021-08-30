@@ -1,0 +1,26 @@
+<div>
+  <center><h2>Daftar Topik Pelajaran</h2></center>
+
+  <!-- display topic list in a table -->
+  <table class="table table-bordered">
+    <thead class="table-primary">
+      <tr>
+        <th scope="col">#</th>
+        <th>Topik Pelajaran</th>
+        <th>Tindakan</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php if (!isset($topicList)) { ?>
+        <tr>
+          <td>Silahkan pilih mata pelajaran dan tekan tombol tampilkan untuk menampilkan daftar topik</td>
+        </tr>
+      <?php }?>
+      <!-- <tr>
+        <td scope="row">1</td>
+        <td>123</td>
+        <td>321</td>
+      </tr> -->
+    </tbody>
+  </table>
+</div>

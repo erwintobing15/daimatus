@@ -12,6 +12,7 @@
           switch($_GET['content']) {
             case 'home' :  require_once(ADMIN_TEMPLATES_PATH . "/home.html"); break;
             case 'user' :  require_once(ADMIN_TEMPLATES_PATH . '/user.html'); break;
+            case 'topic' :  require_once(ADMIN_TEMPLATES_PATH . '/topic.html'); break;
             case 'matpel' :  require_once(ADMIN_TEMPLATES_PATH . '/matpel.html'); break;
             default:  require_once(ADMIN_TEMPLATES_PATH . "/home.html");
           }
