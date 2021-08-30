@@ -23,6 +23,37 @@ class Topic
     return $result;
   }
 
+  // database handler to add new topic
+  public function addTopic($matpelId,$topicName) {
+    $sql = "INSERT INTO topic (topic_name, matpel_id)
+            VALUES ('".$topicName."', '".$matpelId."')";
+
+    if ($this->conn->query($sql) == TRUE) {
+      return "Berhasil menambah topic baru!";
+    }
+    return FALSE;
+  }
+
+  // database handler to delete topic
+  public function delTopic($topicId) {
+    $sql = "DELETE FROM topic WHERE topic_id = '".$topicId."'";
+    if ($this->conn->query($sql) == TRUE) {
+      return "Berhasil menghapus topik materi!";
+    }
+    return FALSE;
+  }
+
+  // database handler to update existing topic
+  public function updateTopic($topicId,$topicName) {
+    // update matpel
+    $sql = "UPDATE topic
+            SET topic_name    = '".$topicName."'
+            WHERE topic_id = '".$topicId."'";
+    if ($this->conn->query($sql) == TRUE) {
+      return "Berhasil mengubah topik!";
+    }
+    return FALSE;
+  }
 
 }
 

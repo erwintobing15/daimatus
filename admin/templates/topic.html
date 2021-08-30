@@ -15,7 +15,7 @@
   <center><h2>Daftar Topik Pelajaran</h2></center>
   <!-- add new topic button -->
   <div style="float: right;">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#add-topic"
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-topic"
     onclick="">Tambah Topik</button>
   </div>
   <!-- button to select topic to display by matpel name -->
@@ -51,7 +51,7 @@
     <tbody>
       <?php if (!isset($resultTopic)) { ?>
         <tr>
-          <td>Silahkan pilih mata pelajaran dan tekan tombol tampilkan untuk menampilkan daftar topik</td>
+          <td>Silahkan pilih mata pelajaran dan tekan tombol tampilkan untuk menampilkan daftar topik per mata pelajaran</td>
         </tr>
       <?php } else { ?>
         <?php if ($resultTopic->num_rows > 0) { ?>
@@ -78,18 +78,18 @@
 </div>
 
 <!-- add new topic modal -->
-<form action="../admin/library/topicAction.php" method="post">
-  <div class="modal fade" id="add-topic" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addModalLabel">Tambah Topik Materi Baru</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
+<div class="modal fade" id="add-topic" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel">Tambah Topik Materi Baru</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="../admin/library/topicAction.php" method="post">
           <div class="mb-3">
-            <label for="topic-add" class="col-form-label">Mata pelajaran:</label>
-            <select name="topic-add" id="topic-add" class="form-select" aria-label=".form-select-sm example">
+            <label for="matpel-add" class="col-form-label">Mata pelajaran:</label>
+            <select name="matpel-add" id="matpel-add" class="form-select" aria-label=".form-select-sm example">
               <?php $resultMatpel = $matpel->getMatpels(); ?>
               <?php if ($resultMatpel->num_rows > 0) { ?>
                 <?php while ($row = $resultMatpel->fetch_assoc()) { ?>
@@ -110,11 +110,12 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
             <input type="submit" name="addTopic"  class="btn btn-primary" value="Tambah">
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
-</form>
+</div>
+
 <!-- update topic modal -->
 <form action="../admin/library/topicAction.php" method="post">
   <input type="hidden" name="updateTopicId" id="updateTopicId">
@@ -126,21 +127,6 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div class="mb-3">
-            <label for="topic-update" class="col-form-label">Mata pelajaran:</label>
-            <select name="topic-update" id="topic-update" class="form-select" aria-label=".form-select-sm example">
-              <?php $resultMatpel = $matpel->getMatpels(); ?>
-              <?php if ($resultMatpel->num_rows > 0) { ?>
-                <?php while ($row = $resultMatpel->fetch_assoc()) { ?>
-                  <?php if ($row['matpel_id'] == $matpelId) { ?>
-                    <option value="<?php echo $row['matpel_id']; ?>" selected><?php echo $row['name']; ?></option>
-                  <?php } else { ?>
-                    <option value="<?php echo $row['matpel_id']; ?>"><?php echo $row['name']; ?></option>
-                  <?php } ?>
-                <?php } ?>
-              <?php }?>
-            </select>
-          </div>
           <div class="mb-3">
             <label for="topic-update" class="col-form-label">Topik:</label>
             <textarea name="topic-update" id="topic-update" rows="4" class="form-control" required></textarea>
