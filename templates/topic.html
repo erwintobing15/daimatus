@@ -1,11 +1,14 @@
 <?php
   require_once(ADMIN_LIBRARY_PATH . '/matpel.php');
+  require_once(ADMIN_LIBRARY_PATH . '/topic.php');
 
   $matpel = new Matpel($database['host'],$database['username'],$database['password'],$database['name']);
+  $matpelId = $_GET['matpel'];
+  $resultMatpel = $matpel->selectMatpelById($matpelId);
 
-  $result = $matpel->getMatpels();
+  $topic = new Topic($database['host'],$database['username'],$database['password'],$database['name']);
+  $resultTopic = $topic->getTopicByMatpel($matpelId );
 ?>
-
 
 <div id="materiList" class="container">
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -15,20 +18,35 @@
     </ol>
   </nav>
 
-  <h6>Daftar Materi Mata Pelajaran Matematika</h6>
+  <?php while ($row = $resultMatpel->fetch_assoc()) { ?>
+    <h6>Daftar Materi Mata Pelajaran <?php echo $row['name']; ?></h6>
+  <?php } ?>
 
-  <div class="topic">
-    BAB 1 PECAHAN
-  </div>
-  <div class="subTopic">
-    <ul>
-      <li>
-        <a href="?content=materi&subTopic=Menjelaskan dan mengidentifikasi pecahan-pecahan senilai dengan gambar dan model konkret">
-          Menjelaskan dan mengidentifikasi pecahan-pecahan senilai dengan gambar dan model konkret
-        </a><br>
-        <p class="subTopicContext">video 4 menit</p>
-      </li>
-    </ul>
-  </div>
-
+  <?php if ($resultTopic->num_rows > 0) {?>
+    <?php $counter = 1; ?>
+    <?php while ($row = $resultTopic->fetch_assoc()) {?>
+      <div class="topic" id="<?php echo 'topic'.$counter; ?>">
+        <?php echo $row['topic_name']; ?>
+      </div>
+      <div class="sub-topic" id="<?php echo 'sub-topic'.$counter; ?>">
+        <ul>
+          <li>
+            <a href="?content=materi&subtopic=1">
+              Menjelaskan dan mengidentifikasi pecahan-pecahan senilai dengan gambar dan model konkret
+            </a><br>
+            <p class="sub-topic-context">video 4 menit</p>
+          </li>
+        </ul>
+      </div>
+      <?php $counter += 1; ?>
+    <?php } ?>
+  <?php } else {?>
+    <div>
+      <h2>Daftar materi kosong</h2>
+    </div>
+  <?php } ?>
 </div>
+
+<script type="text/javascript">
+  var topicRows = <?php echo $resultTopic->num_rows; ?>;
+</script>

@@ -23,6 +23,14 @@ class Matpel
     return $result;
   }
 
+  // database handler to select matpel by id
+  public function selectMatpelById($matpelId) {
+    $sql = "SELECT name FROM matpel WHERE matpel_id = '".$matpelId."'";
+    $result = $this->conn->query($sql);
+
+    return $result;
+  }
+
   // database handler to add new matpel
   public function addMatpel($name,$img,$grade,$active,$file) {
     // get user_id from session

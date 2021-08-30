@@ -83,29 +83,29 @@ body{
 
 
  /*
-    style for materi_list content
+    style for topic content
     ref : #85 to #112
  */
  #materiList {
   margin-top: 110px;
  }
 
- .subTopic, .topic {
+ .sub-topic, .topic {
   padding: 15px;
   background-color: #fff;
   border: solid 1px #c3c3c3;
   margin : 5px;
 }
 
-.subTopic {
+.sub-topic {
   display: none;
 }
 
-.subTopic > ul > li > a {
+.sub-topic > ul > li > a {
   color: black;
 }
 
-.subTopicContext {
+.sub-topic-context {
   margin-top: 5px;
   font-size: 10 px;
   color: #7F7F7F;
