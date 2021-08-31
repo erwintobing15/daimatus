@@ -41,6 +41,15 @@ class Materi
       return $result;
     }
 
+    // database handler to get materi by id
+    public function getMateriByTopic($topicId) {
+      $sql = "SELECT * FROM materi
+              WHERE topic_id = '".$topicId."'";
+      $result = $this->conn->query($sql);
+
+      return $result;
+    }
+
     // database handler to add new materi
     public function addMateri($subTopic,$video,$matpelId,$topicId,$file) {
       $sql = "INSERT INTO materi (sub_topic, video, matpel_id, topic_id)

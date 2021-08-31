@@ -1,6 +1,7 @@
 <?php
   require_once(ADMIN_LIBRARY_PATH . '/matpel.php');
   require_once(ADMIN_LIBRARY_PATH . '/topic.php');
+  require_once(ADMIN_LIBRARY_PATH . '/materi.php');
 
   $matpel = new Matpel($database['host'],$database['username'],$database['password'],$database['name']);
   $matpelId = $_GET['matpel'];
@@ -8,6 +9,8 @@
 
   $topic = new Topic($database['host'],$database['username'],$database['password'],$database['name']);
   $resultTopic = $topic->getTopicByMatpel($matpelId );
+
+  $materi = new Materi($database['host'],$database['username'],$database['password'],$database['name']);
 ?>
 
 <div id="materiList" class="container">
@@ -30,12 +33,22 @@
       </div>
       <div class="sub-topic" id="<?php echo 'sub-topic'.$counter; ?>">
         <ul>
-          <li>
-            <a href="?content=materi&subtopic=1">
-              Menjelaskan dan mengidentifikasi pecahan-pecahan senilai dengan gambar dan model konkret
-            </a><br>
-            <p class="sub-topic-context">video 4 menit</p>
-          </li>
+          <?php if($_GET['content'] == 'materi_list') { ?>
+            <?php $resultMateri = $materi->getMateriByTopic($row['topic_id']); ?>
+            <?php if ($resultMateri->num_rows > 0) { ?>
+              <?php while ($_row = $resultMateri->fetch_assoc()) { ?>
+                <li>
+                  <a href="?content=materi&materi_id=<?php echo $_row['materi_id']; ?>">
+                    <?php echo $_row['sub_topic']; ?>
+                  </a>
+                </li>
+              <?php } ?>
+            <?php } else { ?>
+                <p class="sub-topic-context">Sub-topik dan video materi belum ditambahkan</p>
+            <?php }?>
+          <?php } else { ?>
+            <!-- action for kuis_list -->
+          <?php } ?>
         </ul>
       </div>
       <?php $counter += 1; ?>
