@@ -1,0 +1,29 @@
+<?php
+  require_once(ADMIN_LIBRARY_PATH . '/materi.php');
+
+  $materiId = $_GET['materi_id'];
+  $materi = new Materi($database['host'],$database['username'],$database['password'],$database['name']);
+  $result = $materi->getMateriById($materiId);
+?>
+<div class="container" style="margin-top: 110px;">
+
+  <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="?content=matpel">Mata Pelajaran</a></li>
+      <li class="breadcrumb-item"><a href="?content=materi_list&matpel=<?php echo $_GET['matpel'];?>">Materi</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Video</li>
+    </ol>
+  </nav>
+
+  <?php while ($row = $result->fetch_assoc()) { ?>
+    <h6><?php echo $row['sub_topic']; ?></h6>
+
+  <div class="materi-video">
+    <video width="400" controls>
+      <source src="<?php echo ('admin/videos/materi/'.$row['video']); ?>" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+  </div>
+  <?php } ?>
+
+</div>

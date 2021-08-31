@@ -41,10 +41,19 @@ class Materi
       return $result;
     }
 
-    // database handler to get materi by id
+    // database handler to get materi by topic
     public function getMateriByTopic($topicId) {
       $sql = "SELECT * FROM materi
               WHERE topic_id = '".$topicId."'";
+      $result = $this->conn->query($sql);
+
+      return $result;
+    }
+
+    // database handler to get materi by id
+    public function getMateriById($materiId) {
+      $sql = "SELECT * FROM materi
+              WHERE materi_id = '".$materiId."'";
       $result = $this->conn->query($sql);
 
       return $result;

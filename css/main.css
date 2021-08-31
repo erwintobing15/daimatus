@@ -110,3 +110,25 @@ body{
   font-size: 10 px;
   color: #7F7F7F;
 }
+
+/*
+  style for materi content
+  ref : #114 to #134
+*/
+
+video {
+  margin-top: 10px;
+  width: 100%;
+  height: auto;
+  display: block
+}
+
+/* Logo image size for devices 400px and larger: */
+@media (min-width: 768px) {
+  video {
+    margin-top: 10px;
+    width: 70%;
+    height: auto;
+    display: block
+  }
+}
