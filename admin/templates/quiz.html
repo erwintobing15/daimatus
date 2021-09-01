@@ -202,7 +202,7 @@
               <?php if ($resultMateri->num_rows > 0) { ?>
                 <?php $counter = 1; ?>
                 <?php while ($row = $resultMateri->fetch_assoc()) { ?>
-                  <option value="<?php echo $row['materi_id']; ?>" id="<?php echo 'materi-add'.$counter; ?>"
+                  <option value="<?php echo $row['sub_topic']; ?>" id="<?php echo 'materi-add'.$counter; ?>"
                     class="<?php echo 'materi-add'.$row['topic_id']; ?>" style="display: none">
                     <?php echo $row['sub_topic']; ?>
                   </option>
@@ -222,24 +222,24 @@
             <textarea name="question-add" id="question-add" rows="4" class="form-control" required></textarea>
           </div>
           <div class="mb-3">
-            <label for="choice_a" class="col-form-label">Pilihan A:</label>
-            <input type="text" name="choice_a" class="form-control" id="choice_a" required>
+            <label for="choice_a-add" class="col-form-label">Pilihan A:</label>
+            <input type="text" name="choice_a-add" class="form-control" id="choice_a-add" required>
           </div>
           <div class="mb-3">
-            <label for="choice_b" class="col-form-label">Pilihan B:</label>
-            <input type="text" name="choice_b" class="form-control" id="choice_b" required>
+            <label for="choice_b-add" class="col-form-label">Pilihan B:</label>
+            <input type="text" name="choice_b-add" class="form-control" id="choice_b-add" required>
           </div>
           <div class="mb-3">
-            <label for="choice_c" class="col-form-label">Pilihan C:</label>
-            <input type="text" name="choice_c" class="form-control" id="choice_c" required>
+            <label for="choice_c-add" class="col-form-label">Pilihan C:</label>
+            <input type="text" name="choice_c-add" class="form-control" id="choice_c-add" required>
           </div>
           <div class="mb-3">
-            <label for="choice_d" class="col-form-label">Pilihan D:</label>
-            <input type="text" name="choice_d" class="form-control" id="choice_d" required>
+            <label for="choice_d-add" class="col-form-label">Pilihan D:</label>
+            <input type="text" name="choice_d-add" class="form-control" id="choice_d-add" required>
           </div>
           <div class="mb-3">
-            <label for="answer" class="col-form-label">Jawaban:</label>
-            <input type="text" name="answer" class="form-control" id="answer" maxlength="1" required>
+            <label for="answer-add" class="col-form-label">Jawaban:</label>
+            <input type="text" name="answer-add" class="form-control" id="answer-add" maxlength="1" required>
             <small class="form-text text-muted">Gunakan huruf kecil (a,b,c, atau d)</small>
           </div>
           <div style="float: right;">
@@ -264,62 +264,6 @@
         </div>
         <div class="modal-body">
           <div class="mb-3">
-            <label for="matpel-update" class="col-form-label">Mata pelajaran:</label>
-            <select name="matpel-update" id="matpel-update" class="form-select" aria-label=".form-select-sm example"
-             onclick="setTopicOption(this,<?php echo $topicLength; ?>, 'topic-update')">
-              <?php $resultMatpel = $matpel->getMatpels(); ?>
-              <?php if ($resultMatpel->num_rows > 0) { ?>
-                <?php while ($row = $resultMatpel->fetch_assoc()) { ?>
-                  <?php if ($row['matpel_id'] == $matpelId) { ?>
-                    <option value="<?php echo $row['matpel_id']; ?>" selected><?php echo $row['name']; ?></option>
-                  <?php } else { ?>
-                    <option value="<?php echo $row['matpel_id']; ?>"><?php echo $row['name']; ?></option>
-                  <?php } ?>
-                <?php } ?>
-              <?php }?>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="topic-update" class="col-form-label">Topik:</label>
-            <select name="topic-update" id="topic-update" class="form-select" aria-label=".form-select-sm example"
-            onclick="setTopicOption(this,<?php echo $materiLength; ?>, 'materi-update')">
-              <?php $resultTopic = $topic->getTopics(); ?>
-              <?php if ($resultTopic->num_rows > 0) { ?>
-                <?php $counter = 1; ?>
-                <?php while ($row = $resultTopic->fetch_assoc()) { ?>
-                  <?php if ($row['topic_id'] == $topicId) { ?>
-                    <option value="<?php echo $row['topic_id']; ?>" id="<?php echo 'topic-update'.$counter; ?>"
-                      class="<?php echo 'topic-update'.$row['matpel_id']; ?>" style="display: none" selected >
-                      <?php echo $row['topic_name']; ?>
-                    </option>
-                  <?php } else { ?>
-                    <option value="<?php echo $row['topic_id']; ?>" id="<?php echo 'topic-update'.$counter; ?>"
-                      class="<?php echo 'topic-update'.$row['matpel_id']; ?>" style="display: none">
-                      <?php echo $row['topic_name']; ?>
-                    </option>
-                  <?php } ?>
-                  <?php $counter += 1; ?>
-                <?php } ?>
-              <?php }?>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="materi-update" class="col-form-label">Sub-topik:</label>
-            <select name="materi-update" id="materi-update" class="form-select" aria-label=".form-select-sm example">
-              <?php $resultMateri = $materi->getMateris(); ?>
-              <?php if ($resultMateri->num_rows > 0) { ?>
-                <?php $counter = 1; ?>
-                <?php while ($row = $resultMateri->fetch_assoc()) { ?>
-                  <option value="<?php echo $row['materi_id']; ?>" id="<?php echo 'materi-update'.$counter; ?>"
-                    class="<?php echo 'materi-update'.$row['topic_id']; ?>" style="display: none">
-                    <?php echo $row['sub_topic']; ?>
-                  </option>
-                  <?php $counter += 1; ?>
-                <?php } ?>
-              <?php }?>
-            </select>
-          </div>
-          <div class="mb-3">
             <label for="img-update" class="col-form-label">Gambar:</label>
             <input type="file" class="form-control" id="img-update" name="img-update"
             accept="image/x-png,image/gif,image/jpeg">
@@ -330,29 +274,29 @@
             <textarea name="question-update" id="question-update" rows="4" class="form-control" required></textarea>
           </div>
           <div class="mb-3">
-            <label for="choice_a" class="col-form-label">Pilihan A:</label>
-            <input type="text" name="choice_a" class="form-control" id="choice_a" required>
+            <label for="choice_a-update" class="col-form-label">Pilihan A:</label>
+            <input type="text" name="choice_a-update" class="form-control" id="choice_a-update" required>
           </div>
           <div class="mb-3">
-            <label for="choice_b" class="col-form-label">Pilihan B:</label>
-            <input type="text" name="choice_b" class="form-control" id="choice_b" required>
+            <label for="choice_b-update" class="col-form-label">Pilihan B:</label>
+            <input type="text" name="choice_b-update" class="form-control" id="choice_b-update" required>
           </div>
           <div class="mb-3">
-            <label for="choice_c" class="col-form-label">Pilihan C:</label>
-            <input type="text" name="choice_c" class="form-control" id="choice_c" required>
+            <label for="choice_c-update" class="col-form-label">Pilihan C:</label>
+            <input type="text" name="choice_c-update" class="form-control" id="choice_c-update" required>
           </div>
           <div class="mb-3">
-            <label for="choice_d" class="col-form-label">Pilihan D:</label>
-            <input type="text" name="choice_d" class="form-control" id="choice_d" required>
+            <label for="choice_d-update" class="col-form-label">Pilihan D:</label>
+            <input type="text" name="choice_d-update" class="form-control" id="choice_d-update" required>
           </div>
           <div class="mb-3">
-            <label for="answer" class="col-form-label">Jawaban:</label>
-            <input type="text" name="answer" class="form-control" id="answer" maxlength="1" required>
+            <label for="answer-update" class="col-form-label">Jawaban:</label>
+            <input type="text" name="answer-update" class="form-control" id="answer-update" maxlength="1" required>
             <small class="form-text text-muted">Gunakan huruf kecil (a,b,c, atau d)</small>
           </div>
           <div style="float: right;">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
-            <input type="submit" name="updateQuiz"  class="btn btn-primary" value="Tambah">
+            <input type="submit" name="updateQuiz"  class="btn btn-primary" value="Ubah">
           </div>
         </div>
       </div>

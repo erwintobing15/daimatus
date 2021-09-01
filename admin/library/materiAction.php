@@ -23,7 +23,7 @@ if (isset($_POST['delMateri'])) {
   $message = $materi->delMateri($materiId);
 }
 
-// action when there is a submit to delete materi
+// action when there is a submit to update materi
 if (isset($_POST['updateMateri'])) {
   $materiId = $_POST['updateMateriId'];
   $subTopic = $_POST['subtopic-update'];

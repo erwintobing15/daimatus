@@ -82,3 +82,7 @@ body{
 .wrapper .main_content .info div{
   margin-bottom: 20px;
 }
+
+h2 {
+  padding-bottom: 35px;
+}
