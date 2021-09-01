@@ -1,6 +1,7 @@
 <?php
   require_once(ADMIN_LIBRARY_PATH . '/matpel.php');
   require_once(ADMIN_LIBRARY_PATH . '/topic.php');
+  require_once(ADMIN_LIBRARY_PATH . '/materi.php');
   require_once(ADMIN_LIBRARY_PATH . '/quiz.php');
 
   $matpel = new Matpel($database['host'],$database['username'],$database['password'],$database['name']);
@@ -8,6 +9,11 @@
 
   $topic = new Topic($database['host'],$database['username'],$database['password'],$database['name']);
   $resultTopic = $topic->getTopics();
+  $topicLength = $resultTopic->num_rows;
+
+  $materi = new Materi($database['host'],$database['username'],$database['password'],$database['name']);
+  $resultMateri = $materi->getMateris();
+  $materiLength = $resultMateri->num_rows;
 
   $quiz = new Quiz($database['host'],$database['username'],$database['password'],$database['name']);
   if (isset($_POST['displayQuiz'])) {
@@ -22,9 +28,9 @@
   <!-- add new quiz button -->
   <div style="float: right;">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-quiz"
-    onclick="">Tambah Kuis</button>
+    onclick="">Tambah Soal</button>
   </div>
-  <!-- button to select materi to display by matpel name -->
+  <!-- button to select quiz to display by matpel and topic -->
   <form action="" method="post">
     <div class="row">
       <div class="col-auto">
@@ -135,4 +141,111 @@
     <?php } ?>
   </table>
 
+</div>
+
+<!-- add new quiz modal -->
+<div class="modal fade" id="add-quiz" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel">Tambah Soal Baru</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="../admin/library/quizAction.php" method="post" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="matpel-add" class="col-form-label">Mata pelajaran:</label>
+            <select name="matpel-add" id="matpel-add" class="form-select" aria-label=".form-select-sm example"
+             onclick="setTopicOption(this,<?php echo $topicLength; ?>, 'topic-add')">
+              <?php $resultMatpel = $matpel->getMatpels(); ?>
+              <?php if ($resultMatpel->num_rows > 0) { ?>
+                <?php while ($row = $resultMatpel->fetch_assoc()) { ?>
+                  <?php if ($row['matpel_id'] == $matpelId) { ?>
+                    <option value="<?php echo $row['matpel_id']; ?>" selected><?php echo $row['name']; ?></option>
+                  <?php } else { ?>
+                    <option value="<?php echo $row['matpel_id']; ?>"><?php echo $row['name']; ?></option>
+                  <?php } ?>
+                <?php } ?>
+              <?php }?>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="topic-add" class="col-form-label">Topik:</label>
+            <select name="topic-add" id="topic-add" class="form-select" aria-label=".form-select-sm example"
+            onclick="setTopicOption(this,<?php echo $materiLength; ?>, 'materi-add')">
+              <?php $resultTopic = $topic->getTopics(); ?>
+              <?php if ($resultTopic->num_rows > 0) { ?>
+                <?php $counter = 1; ?>
+                <?php while ($row = $resultTopic->fetch_assoc()) { ?>
+                  <?php if ($row['topic_id'] == $topicId) { ?>
+                    <option value="<?php echo $row['topic_id']; ?>" id="<?php echo 'topic-add'.$counter; ?>"
+                      class="<?php echo 'topic-add'.$row['matpel_id']; ?>" style="display: none" selected >
+                      <?php echo $row['topic_name']; ?>
+                    </option>
+                  <?php } else { ?>
+                    <option value="<?php echo $row['topic_id']; ?>" id="<?php echo 'topic-add'.$counter; ?>"
+                      class="<?php echo 'topic-add'.$row['matpel_id']; ?>" style="display: none">
+                      <?php echo $row['topic_name']; ?>
+                    </option>
+                  <?php } ?>
+                  <?php $counter += 1; ?>
+                <?php } ?>
+              <?php }?>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="materi-add" class="col-form-label">Sub-topik:</label>
+            <select name="materi-add" id="materi-add" class="form-select" aria-label=".form-select-sm example">
+              <?php $resultMateri = $materi->getMateris(); ?>
+              <?php if ($resultMateri->num_rows > 0) { ?>
+                <?php $counter = 1; ?>
+                <?php while ($row = $resultMateri->fetch_assoc()) { ?>
+                  <option value="<?php echo $row['materi_id']; ?>" id="<?php echo 'materi-add'.$counter; ?>"
+                    class="<?php echo 'materi-add'.$row['topic_id']; ?>" style="display: none">
+                    <?php echo $row['sub_topic']; ?>
+                  </option>
+                  <?php $counter += 1; ?>
+                <?php } ?>
+              <?php }?>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="img-add" class="col-form-label">Gambar:</label>
+            <input type="file" class="form-control" id="img-add" name="img-add"
+            accept="image/x-png,image/gif,image/jpeg">
+            <small class="form-text text-muted">Upload gambar (png,jpg,gif) jika perlu atau kosongkan</small>
+          </div>
+          <div class="mb-3">
+            <label for="question-add" class="col-form-label">Pertanyaan:</label>
+            <textarea name="question-add" id="question-add" rows="4" class="form-control" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="choice_a" class="col-form-label">Pilihan A:</label>
+            <input type="text" name="choice_a" class="form-control" id="choice_a" required>
+          </div>
+          <div class="mb-3">
+            <label for="choice_b" class="col-form-label">Pilihan B<base href="#" target="_blank">:</label>
+            <input type="text" name="choice_b" class="form-control" id="choice_b" required>
+          </div>
+          <div class="mb-3">
+            <label for="choice_c" class="col-form-label">Pilihan C:</label>
+            <input type="text" name="choice_c" class="form-control" id="choice_c" required>
+          </div>
+          <div class="mb-3">
+            <label for="choice_d" class="col-form-label">Pilihan D:</label>
+            <input type="text" name="choice_d" class="form-control" id="choice_d" required>
+          </div>
+          <div class="mb-3">
+            <label for="answer" class="col-form-label">Jawaban:</label>
+            <input type="text" name="answer" class="form-control" id="answer" maxlength="1" required>
+            <small class="form-text text-muted">Gunakan huruf kecil (a,b,c, atau d)</small>
+          </div>
+          <div style="float: right;">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
+            <input type="submit" name="addMateri"  class="btn btn-primary" value="Tambah">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

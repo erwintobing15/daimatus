@@ -23,5 +23,13 @@
 
      return $result;
    }
+
+   // database handler to get all quiz
+   public function getQuizzes() {
+     $sql = "SELECT * FROM quiz";
+     $result = $this->conn->query($sql);
+
+     return $result;
+   }
  }
 ?>
