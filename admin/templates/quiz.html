@@ -16,9 +16,11 @@
   $materiLength = $resultMateri->num_rows;
 
   $quiz = new Quiz($database['host'],$database['username'],$database['password'],$database['name']);
+
   if (isset($_POST['displayQuiz'])) {
     $matpelId = $_POST['matpelOption'];
     $topicId = $_POST['topicOption'];
+
     $resultQuiz = $quiz->getQuizByMatpelTopic($matpelId,$topicId);
   }
 ?>
@@ -242,10 +244,140 @@
           </div>
           <div style="float: right;">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
-            <input type="submit" name="addMateri"  class="btn btn-primary" value="Tambah">
+            <input type="submit" name="addQuiz"  class="btn btn-primary" value="Tambah">
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
+
+<!-- update quiz modal -->
+<form action="../admin/library/quizAction.php" method="post" enctype="multipart/form-data">
+  <input type="hidden" id="updateQuizId" name="updateQuizId">
+  <div class="modal fade" id="update-quiz" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateModalLabel">Ubah Soal</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="matpel-update" class="col-form-label">Mata pelajaran:</label>
+            <select name="matpel-update" id="matpel-update" class="form-select" aria-label=".form-select-sm example"
+             onclick="setTopicOption(this,<?php echo $topicLength; ?>, 'topic-update')">
+              <?php $resultMatpel = $matpel->getMatpels(); ?>
+              <?php if ($resultMatpel->num_rows > 0) { ?>
+                <?php while ($row = $resultMatpel->fetch_assoc()) { ?>
+                  <?php if ($row['matpel_id'] == $matpelId) { ?>
+                    <option value="<?php echo $row['matpel_id']; ?>" selected><?php echo $row['name']; ?></option>
+                  <?php } else { ?>
+                    <option value="<?php echo $row['matpel_id']; ?>"><?php echo $row['name']; ?></option>
+                  <?php } ?>
+                <?php } ?>
+              <?php }?>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="topic-update" class="col-form-label">Topik:</label>
+            <select name="topic-update" id="topic-update" class="form-select" aria-label=".form-select-sm example"
+            onclick="setTopicOption(this,<?php echo $materiLength; ?>, 'materi-update')">
+              <?php $resultTopic = $topic->getTopics(); ?>
+              <?php if ($resultTopic->num_rows > 0) { ?>
+                <?php $counter = 1; ?>
+                <?php while ($row = $resultTopic->fetch_assoc()) { ?>
+                  <?php if ($row['topic_id'] == $topicId) { ?>
+                    <option value="<?php echo $row['topic_id']; ?>" id="<?php echo 'topic-update'.$counter; ?>"
+                      class="<?php echo 'topic-update'.$row['matpel_id']; ?>" style="display: none" selected >
+                      <?php echo $row['topic_name']; ?>
+                    </option>
+                  <?php } else { ?>
+                    <option value="<?php echo $row['topic_id']; ?>" id="<?php echo 'topic-update'.$counter; ?>"
+                      class="<?php echo 'topic-update'.$row['matpel_id']; ?>" style="display: none">
+                      <?php echo $row['topic_name']; ?>
+                    </option>
+                  <?php } ?>
+                  <?php $counter += 1; ?>
+                <?php } ?>
+              <?php }?>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="materi-update" class="col-form-label">Sub-topik:</label>
+            <select name="materi-update" id="materi-update" class="form-select" aria-label=".form-select-sm example">
+              <?php $resultMateri = $materi->getMateris(); ?>
+              <?php if ($resultMateri->num_rows > 0) { ?>
+                <?php $counter = 1; ?>
+                <?php while ($row = $resultMateri->fetch_assoc()) { ?>
+                  <option value="<?php echo $row['materi_id']; ?>" id="<?php echo 'materi-update'.$counter; ?>"
+                    class="<?php echo 'materi-update'.$row['topic_id']; ?>" style="display: none">
+                    <?php echo $row['sub_topic']; ?>
+                  </option>
+                  <?php $counter += 1; ?>
+                <?php } ?>
+              <?php }?>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="img-update" class="col-form-label">Gambar:</label>
+            <input type="file" class="form-control" id="img-update" name="img-update"
+            accept="image/x-png,image/gif,image/jpeg">
+            <small class="form-text text-muted">Upload gambar (png,jpg,gif) jika perlu atau kosongkan</small>
+          </div>
+          <div class="mb-3">
+            <label for="question-update" class="col-form-label">Pertanyaan:</label>
+            <textarea name="question-update" id="question-update" rows="4" class="form-control" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="choice_a" class="col-form-label">Pilihan A:</label>
+            <input type="text" name="choice_a" class="form-control" id="choice_a" required>
+          </div>
+          <div class="mb-3">
+            <label for="choice_b" class="col-form-label">Pilihan B<base href="#" target="_blank">:</label>
+            <input type="text" name="choice_b" class="form-control" id="choice_b" required>
+          </div>
+          <div class="mb-3">
+            <label for="choice_c" class="col-form-label">Pilihan C:</label>
+            <input type="text" name="choice_c" class="form-control" id="choice_c" required>
+          </div>
+          <div class="mb-3">
+            <label for="choice_d" class="col-form-label">Pilihan D:</label>
+            <input type="text" name="choice_d" class="form-control" id="choice_d" required>
+          </div>
+          <div class="mb-3">
+            <label for="answer" class="col-form-label">Jawaban:</label>
+            <input type="text" name="answer" class="form-control" id="answer" maxlength="1" required>
+            <small class="form-text text-muted">Gunakan huruf kecil (a,b,c, atau d)</small>
+          </div>
+          <div style="float: right;">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
+            <input type="submit" name="updateQuiz"  class="btn btn-primary" value="Tambah">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- delete  materi modal -->
+<form action="../admin/library/quizAction.php" method="post">
+  <input type="hidden" name="delQuizId" id="delQuizId">
+  <div class="modal fade" id="delete-quiz" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Apakah anda yakin menghapus soal ini?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        Soal yang telah dihapus tidak akan bisa dikembalikan.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+          <input type="submit" name="delQuiz"  class="btn btn-primary" value="Ya">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
