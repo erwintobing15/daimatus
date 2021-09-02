@@ -1,0 +1,83 @@
+<?php
+  require_once(ADMIN_LIBRARY_PATH . '/materi.php');
+  require_once(ADMIN_LIBRARY_PATH . '/quiz.php');
+
+  $materiId = $_GET['materi_id'];
+  $materi = new Materi($database['host'],$database['username'],$database['password'],$database['name']);
+  $resultMateri = $materi->getMateriById($materiId);
+
+  /* get sub_topic for quiz list */
+  $_row = $resultMateri->fetch_assoc();
+  $subTopic = $_row['sub_topic'];
+
+  /* get quiz list by sub topic */
+  $quiz = new Quiz($database['host'],$database['username'],$database['password'],$database['name']);
+  $resultQuiz = $quiz->getQuizBySubTopic($subTopic);
+  $quizTotal = $resultQuiz->num_rows;
+?>
+<div class="container" style="margin-top: 110px;">
+  <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="?content=matpel">Mata Pelajaran</a></li>
+      <li class="breadcrumb-item"><a href="?content=quiz_list&matpel=<?php echo $_GET['matpel'];?>">Kuis</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Soal</li>
+    </ol>
+  </nav>
+
+  <h6><?php echo $subTopic; ?></h6>
+
+  <?php if ($quizTotal > 0) { ?>
+    <?php $counter = 1; ?>
+    <?php while ($row = $resultQuiz->fetch_assoc()) { ?>
+      <?php
+        $questionId = "kuis".$counter;
+        $choiceId = "pilihan".$counter;
+      ?>
+      <div id="<?php echo $questionId; ?>" class="kuis-content">
+        <p>Soal <?php echo $counter; ?><br><?php echo $row['question']; ?></p>
+        <div class="answer">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="<?php echo $questionId; ?>"
+            id="<?php echo $questionId; ?>-a">
+            <label class="form-check-label" for="<?php echo $questionId; ?>-a">
+              <?php echo $row['choice_a']; ?>
+            </label>
+          </div>
+        </div>
+        <div class="answer">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="<?php echo $questionId; ?>"
+            id="<?php echo $questionId; ?>-b">
+            <label class="form-check-label" for="<?php echo $questionId; ?>-b">
+              <?php echo $row['choice_b']; ?>
+            </label>
+          </div>
+        </div>
+        <div class="answer">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="<?php echo $questionId; ?>"
+            id="<?php echo $questionId; ?>-c">
+            <label class="form-check-label" for="<?php echo $questionId; ?>-c">
+              <?php echo $row['choice_c']; ?>
+            </label>
+          </div>
+        </div>
+        <div class="answer">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="<?php echo $questionId; ?>"
+            id="<?php echo $questionId; ?>-d">
+            <label class="form-check-label" for="<?php echo $questionId; ?>-d">
+              <?php echo $row['choice_d']; ?>
+            </label>
+          </div>
+        </div>
+        <button type="button" class="kuis_btn" name="button" onclick="checkScore()">Hitung Score</button>
+      </div>
+      <?php $counter += 1; ?>
+    <?php } ?>
+  <?php } else { ?>
+    <div class="kuis-content">
+      <p>Kuis belum ditambahakan untuk sub topik materi ini</p>
+    </div>
+  <?php } ?>
+</div>

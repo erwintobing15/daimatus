@@ -49,8 +49,7 @@
           <?php if ($resultMateri->num_rows > 0) { ?>
             <?php while ($_row = $resultMateri->fetch_assoc()) { ?>
               <li>
-                <a href="?content=<?php echo $content;?>&matpel=<?php echo $_GET['matpel'];?>&
-                  materi_id=<?php echo $_row['materi_id']; ?>">
+                <a href="?content=<?php echo $content;?>&matpel=<?php echo $_GET['matpel'];?>&materi_id=<?php echo $_row['materi_id']; ?>">
                   <?php echo $_row['sub_topic']; ?>
                 </a>
               </li>

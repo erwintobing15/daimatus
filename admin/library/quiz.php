@@ -41,6 +41,15 @@
      return $result;
    }
 
+   // database handler to get quiz by sub topic
+   public function getQuizBySubTopic($subTopic) {
+     $sql = "SELECT * FROM quiz
+             WHERE sub_topic = '".$subTopic."'";
+     $result = $this->conn->query($sql);
+
+     return $result;
+   }
+
    // database handler to add new quiz
    public function addQuiz($subTopic,$img,$question,$choice_a,$choice_b,$choice_c,
                              $choice_d,$answer,$matpelId,$topicId,$file)
