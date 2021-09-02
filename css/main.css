@@ -132,3 +132,77 @@ video {
     display: block
   }
 }
+
+/*
+ style for quiz content
+ ref : #136 to #174
+*/
+.quiz-content {
+  padding: 10px;
+  background-color: #fff;
+  border: solid 1px #c3c3c3;
+  margin : 5px;
+}
+
+@media (min-width: 768px) {
+  .quiz-content {
+    padding: 25px;
+    background-color: #fff;
+    border: solid 1px #c3c3c3;
+    margin : 25px;
+  }
+}
+
+.choice {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #D5E8D4;
+  padding: 15px;
+  width: 100%;
+  background-color: #D5E8D4;
+}
+
+#quizImg {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+  .choice {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    border: 1px solid D5E8D4;
+    padding: 15px;
+    width: 70%;
+      background-color: #D5E8D4;
+  }
+
+  #quizImg {
+    width: 35%;
+    margin-bottom: 10px;
+  }
+}
+
+/* Button style */
+.quiz_btn {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  background-color: #fff;
+  color: #009fe1;
+  border: solid 2px #009fe1;
+  border-radius: 3px;
+  transition: .4s;
+}
+
+.quiz_btn:hover {
+  background: #009fe1;
+  color: white;
+}
+
+.quiz_btn:active {
+  -ms-transform: scale(0.95); /* IE 9 */
+  -webkit-transform: scale(0.95); /* Safari 3-8 */
+  transform: scale(0.95);
+}

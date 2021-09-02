@@ -33,9 +33,14 @@
         $questionId = "kuis".$counter;
         $choiceId = "pilihan".$counter;
       ?>
-      <div id="<?php echo $questionId; ?>" class="kuis-content">
-        <p>Soal <?php echo $counter; ?><br><?php echo $row['question']; ?></p>
-        <div class="answer">
+      <div id="<?php echo $questionId; ?>" class="quiz-content">
+        <p>Soal <?php echo $counter; ?></p>
+        <?php if ($row['img'] != "") { ?>
+          <img src="<?php echo ('admin/images/quiz/'.$row['img']); ?>"
+           alt="..." id="quizImg">
+        <?php } ?>
+        <p><?php echo $row['question']; ?></p>
+        <div class="choice">
           <div class="form-check">
             <input class="form-check-input" type="radio" name="<?php echo $questionId; ?>"
             id="<?php echo $questionId; ?>-a">
@@ -44,7 +49,7 @@
             </label>
           </div>
         </div>
-        <div class="answer">
+        <div class="choice">
           <div class="form-check">
             <input class="form-check-input" type="radio" name="<?php echo $questionId; ?>"
             id="<?php echo $questionId; ?>-b">
@@ -53,7 +58,7 @@
             </label>
           </div>
         </div>
-        <div class="answer">
+        <div class="choice">
           <div class="form-check">
             <input class="form-check-input" type="radio" name="<?php echo $questionId; ?>"
             id="<?php echo $questionId; ?>-c">
@@ -62,7 +67,7 @@
             </label>
           </div>
         </div>
-        <div class="answer">
+        <div class="choice">
           <div class="form-check">
             <input class="form-check-input" type="radio" name="<?php echo $questionId; ?>"
             id="<?php echo $questionId; ?>-d">
@@ -71,13 +76,17 @@
             </label>
           </div>
         </div>
-        <button type="button" class="kuis_btn" name="button" onclick="checkScore()">Hitung Score</button>
       </div>
       <?php $counter += 1; ?>
     <?php } ?>
+    <div class="quiz-content">
+      <button type="button" class="quiz_btn" name="button" onclick="checkScore()">Periksa Nilai</button>
+      <button type="button" class="quiz_btn" name="button" onclick="checkScore()">Submit</button>
+    </div>
   <?php } else { ?>
-    <div class="kuis-content">
+    <div class="quiz-content">
       <p>Kuis belum ditambahakan untuk sub topik materi ini</p>
     </div>
   <?php } ?>
+
 </div>
