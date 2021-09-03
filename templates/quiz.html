@@ -30,11 +30,13 @@
     <?php $counter = 1; ?>
     <?php while ($row = $resultQuiz->fetch_assoc()) { ?>
       <?php
-        $questionId = "kuis".$counter;
-        $choiceId = "pilihan".$counter;
+        $questionId = "quiz".$counter;
+        $choiceId = "choice".$counter;
+        $answerId = "answer".$counter;
+        $counter += 1;
       ?>
       <div id="<?php echo $questionId; ?>" class="quiz-content">
-        <p>Soal <?php echo $counter; ?></p>
+        <p>Soal <?php echo ($counter-1); ?></p>
         <?php if ($row['img'] != "") { ?>
           <img src="<?php echo ('admin/images/quiz/'.$row['img']); ?>"
            alt="..." id="quizImg">
@@ -42,46 +44,86 @@
         <p><?php echo $row['question']; ?></p>
         <div class="choice">
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="<?php echo $questionId; ?>"
-            id="<?php echo $questionId; ?>-a">
-            <label class="form-check-label" for="<?php echo $questionId; ?>-a">
+            <input class="form-check-input" type="radio" name="<?php echo $choiceId; ?>"
+            id="<?php echo $choiceId; ?>-a">
+            <label class="form-check-label" for="<?php echo $choiceId; ?>-a">
               <?php echo $row['choice_a']; ?>
             </label>
           </div>
         </div>
         <div class="choice">
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="<?php echo $questionId; ?>"
-            id="<?php echo $questionId; ?>-b">
-            <label class="form-check-label" for="<?php echo $questionId; ?>-b">
+            <input class="form-check-input" type="radio" name="<?php echo $choiceId; ?>"
+            id="<?php echo $choiceId; ?>-b">
+            <label class="form-check-label" for="<?php echo $choiceId; ?>-b">
               <?php echo $row['choice_b']; ?>
             </label>
           </div>
         </div>
         <div class="choice">
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="<?php echo $questionId; ?>"
-            id="<?php echo $questionId; ?>-c">
-            <label class="form-check-label" for="<?php echo $questionId; ?>-c">
+            <input class="form-check-input" type="radio" name="<?php echo $choiceId; ?>"
+            id="<?php echo $choiceId; ?>-c">
+            <label class="form-check-label" for="<?php echo $choiceId; ?>-c">
               <?php echo $row['choice_c']; ?>
             </label>
           </div>
         </div>
         <div class="choice">
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="<?php echo $questionId; ?>"
-            id="<?php echo $questionId; ?>-d">
-            <label class="form-check-label" for="<?php echo $questionId; ?>-d">
+            <input class="form-check-input" type="radio" name="<?php echo $choiceId; ?>"
+            id="<?php echo $choiceId; ?>-d">
+            <label class="form-check-label" for="<?php echo $choiceId; ?>-d">
               <?php echo $row['choice_d']; ?>
             </label>
           </div>
         </div>
+        <input type="hidden" id="<?php echo $answerId; ?>" value="<?php echo $row['answer']; ?>">
       </div>
-      <?php $counter += 1; ?>
     <?php } ?>
     <div class="quiz-content">
-      <button type="button" class="quiz_btn" name="button" onclick="checkScore()">Periksa Nilai</button>
-      <button type="button" class="quiz_btn" name="button" onclick="checkScore()">Submit</button>
+      <p class="sub-topic-context" style="font-size: 14px;">
+        Jawaban kamu tidah bisa diubah setelah tombol Kumpulkan ditekan. Ayo periksa kembali jawaban kamu!
+      </p>
+      <button type="button" class="quiz_btn" name="button"
+      onclick="checkScore(this,<?php echo $quizTotal; ?>,'choice','answer');">Kumpulkan</button>
+
+
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Open modal for @fat</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
     </div>
   <?php } else { ?>
     <div class="quiz-content">
