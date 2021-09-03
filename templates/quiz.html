@@ -78,6 +78,12 @@
             </label>
           </div>
         </div>
+        <div class="mb-3 row correct-answer" style="display: none;">
+          <div class="col-sm-10">
+            <input type="text" readonly class="form-control-plaintext"
+            value="<?php echo "Jawaban : ". $row['answer']; ?>">
+          </div>
+        </div>
         <input type="hidden" id="<?php echo $answerId; ?>" value="<?php echo $row['answer']; ?>">
       </div>
     <?php } ?>
@@ -87,7 +93,7 @@
       </p>
       <!-- button to display kumpulkan dialog modal-->
       <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-       onclick="disableButton(this)" data-bs-target="#kumpulkan">
+       id="display-kumpulkan-modal" data-bs-target="#kumpulkan">
           Kumpulkan
       </button>
     </div>

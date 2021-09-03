@@ -51,8 +51,15 @@ function checkScore(btn,quizTotal,choice,answer) {
 
     showScore(totalScore,quizTotal);
     disableButton(btn);
+    disableButton(document.getElementById("display-kumpulkan-modal"))
     // reset total score
     totalScore = 0;
+
+    // display correct answer to student
+    var displayedAnwer = document.getElementsByClassName("correct-answer");
+    for (let k = 0; k < displayedAnwer.length; k++) {
+      displayedAnwer[k].style.display = "block";
+    }
   }
 }
 
@@ -84,15 +91,7 @@ function playSound(url) {
 }
 
 function disableButton(btn) {
-
-  var studentName =document.getElementById("student-name").value;
-  var studentId =document.getElementById("student-id").value;
-  var studentClass =document.getElementById("student-class").value;
-
-
-  if (studentName && studentId && studentClass) {
-    btn.disabled = true;
-    btn.style.backgroundColor ='gray';
-    btn.style.color ='white';
-  }
+  btn.disabled = true;
+  btn.style.backgroundColor ='gray';
+  btn.style.color ='white';
 }
