@@ -25,33 +25,35 @@ $(document).ready(function(){
 var totalScore = 0;
 function checkScore(btn,quizTotal,choice,answer) {
 
-  for (let i = 1; i <= quizTotal; i++) {
-    var elName = choice + i;
+  var studentName =document.getElementById("student-name").value;
+  var studentId =document.getElementById("student-id").value;
+  var studentClass =document.getElementById("student-class").value;
 
-    var choices = document.getElementsByName(elName);
-    var selectedChoice;
+  if (studentName && studentId && studentClass) {
+    for (let i = 1; i <= quizTotal; i++) {
+      var elName = choice + i;
 
-    for (let j = 0; j < choices.length; j++) {
-      if (choices[j].checked) {
-        selectedChoice = choices[j].id;
+      var choices = document.getElementsByName(elName);
+      var selectedChoice;
+
+      for (let j = 0; j < choices.length; j++) {
+        if (choices[j].checked) {
+          selectedChoice = choices[j].id;
+        }
+        choices[j].disabled = "true";
       }
-      choices[j].disabled = "true";
+
+      var correctAnswer = elName + "-" + document.getElementById(answer+i).value;
+
+      if (selectedChoice == correctAnswer)
+        totalScore += 1;
     }
 
-    var correctAnswer = elName + "-" + document.getElementById(answer+i).value;
-
-    if (selectedChoice == correctAnswer)
-      totalScore += 1;
+    showScore(totalScore,quizTotal);
+    disableButton(btn);
+    // reset total score
+    totalScore = 0;
   }
-
-  showScore(totalScore,quizTotal);
-
-  totalScore = 0;
-
-  // disable button so user can only pick anwer once
-  btn.disabled = true;
-  btn.style.backgroundColor ='gray';
-  btn.style.color ='white';
 }
 
 function showScore(totalScore,quizTotal) {
@@ -79,4 +81,18 @@ function showScore(totalScore,quizTotal) {
 function playSound(url) {
   const audio = new Audio(url);
   audio.play();
+}
+
+function disableButton(btn) {
+
+  var studentName =document.getElementById("student-name").value;
+  var studentId =document.getElementById("student-id").value;
+  var studentClass =document.getElementById("student-class").value;
+
+
+  if (studentName && studentId && studentClass) {
+    btn.disabled = true;
+    btn.style.backgroundColor ='gray';
+    btn.style.color ='white';
+  }
 }
