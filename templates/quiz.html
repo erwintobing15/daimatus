@@ -1,6 +1,7 @@
 <?php
   require_once(ADMIN_LIBRARY_PATH . '/materi.php');
   require_once(ADMIN_LIBRARY_PATH . '/quiz.php');
+  require_once(ADMIN_LIBRARY_PATH . '/grade.php');
 
   $materiId = $_GET['materi_id'];
   $materi = new Materi($database['host'],$database['username'],$database['password'],$database['name']);
@@ -14,6 +15,26 @@
   $quiz = new Quiz($database['host'],$database['username'],$database['password'],$database['name']);
   $resultQuiz = $quiz->getQuizBySubTopic($subTopic);
   $quizTotal = $resultQuiz->num_rows;
+
+  /* action if there is a submit to add grade */
+  $grade = new Grade($database['host'],$database['username'],$database['password'],$database['name']);
+  if (isset($_POST['addGrade'])) {
+
+    $subTopic = $_POST['sub-topic'];
+    $matpelId = $_POST['matpel-id'];
+    $topicId = $_POST['topic-id'];
+
+    $studentName = $_POST['student-name'];
+    $studentId = $_POST['student-id'];
+    $studentClass = $_POST['student-class'];
+    $studentGrade = $_POST['student-grade'];
+
+    $message = $grade->addGrade($subTopic,$studentName,$studentId,$studentClass,
+                                $studentGrade,$matpelId,$topicId);
+
+    header("Location: ?content=quizresult&materi_id=$materiId&student_id=$studentId");
+    die;
+  }
 ?>
 <div class="container" style="margin-top: 110px;">
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -26,6 +47,18 @@
 
   <h6><?php echo $subTopic; ?></h6>
 
+  <?php if (isset($studentGrade)) { ?>
+    <div class="quiz-content">
+      <h4>Nama         : <?php echo $studentName; ?></h4>
+      <h4>Nomor Induk  : <?php echo $studentId; ?></h4>
+      <h4>Nilai        : <?php echo $studentGrade; ?></h4>
+    </div>
+  <?php } ?>
+
+  <?php
+    $selectedAnswerList = array();
+    $correctAnswerList = array();
+  ?>
   <?php if ($quizTotal > 0) { ?>
     <?php $counter = 1; ?>
     <?php while ($row = $resultQuiz->fetch_assoc()) { ?>
@@ -78,12 +111,6 @@
             </label>
           </div>
         </div>
-        <div class="mb-3 row correct-answer" style="display: none;">
-          <div class="col-sm-10">
-            <input type="text" readonly class="form-control-plaintext"
-            value="<?php echo "Jawaban : ". $row['answer']; ?>">
-          </div>
-        </div>
         <input type="hidden" id="<?php echo $answerId; ?>" value="<?php echo $row['answer']; ?>">
       </div>
     <?php } ?>
@@ -92,11 +119,11 @@
         Jawaban kamu tidah bisa diubah setelah tombol Kumpulkan ditekan. Ayo periksa kembali jawaban kamu!
       </p>
       <!-- button to display kumpulkan dialog modal-->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-       id="display-kumpulkan-modal" data-bs-target="#kumpulkan">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="display-kumpulkan-modal"
+      data-bs-target="#kumpulkan" onclick="checkScore(this,<?php echo $quizTotal; ?>,'choice','answer');">
           Kumpulkan
       </button>
-    </div>
+
   <?php } else { ?>
     <div class="quiz-content">
       <p>Kuis belum ditambahakan untuk sub topik materi ini</p>
@@ -106,15 +133,19 @@
 </div>
 
 <!-- kumpulkan dialog modal -->
-<form class="" action="" method="post">
-  <div class="modal fade" id="kumpulkan" tabindex="-1" aria-labelledby="kumpulkanLabel"
-  style="display: none;" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="kumpulkanLabel">Form Pengumpulan Kuis</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
+<div class="modal fade" id="kumpulkan" tabindex="-1" aria-labelledby="kumpulkanLabel"
+style="display: none;" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="kumpulkanLabel">Form Pengumpulan Kuis</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="" method="post">
+        <input type="hidden" name="student-grade" id="student-grade">
+        <input type="hidden" name="sub-topic" value="<?php echo $_row['sub_topic']; ?>">
+        <input type="hidden" name="matpel-id" value="<?php echo $_row['matpel_id']; ?>">
+        <input type="hidden" name="topic-id" value="<?php echo $_row['topic_id']; ?>">
         <div class="modal-body">
           <div class="mb-3">
             <label for="student-name" class="col-form-label">Nama Lengkap:</label>
@@ -122,7 +153,7 @@
           </div>
           <div class="mb-3">
             <label for="student-id" class="col-form-label">Nomor Induk:</label>
-            <input type="text" class="form-control" id="student-id" name="student-id" required>
+            <input type="number" class="form-control" id="student-id" name="student-id" required>
           </div>
           <div class="mb-3">
             <label for="student-class" class="col-form-label">Kelas:</label>
@@ -131,10 +162,9 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
-          <input type="submit" name="quizSubmit" class="btn btn-primary" value="Kumpulkan"
-            onclick="checkScore(this,<?php echo $quizTotal; ?>,'choice','answer');">
+          <input type="submit" name="addGrade" class="btn btn-primary" value="Kumpulkan">
         </div>
+      </form>
       </div>
-    </div>
   </div>
-</form>
+</div>

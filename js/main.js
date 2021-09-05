@@ -29,7 +29,7 @@ function checkScore(btn,quizTotal,choice,answer) {
   var studentId =document.getElementById("student-id").value;
   var studentClass =document.getElementById("student-class").value;
 
-  if (studentName && studentId && studentClass) {
+
     for (let i = 1; i <= quizTotal; i++) {
       var elName = choice + i;
 
@@ -49,21 +49,20 @@ function checkScore(btn,quizTotal,choice,answer) {
         totalScore += 1;
     }
 
-    showScore(totalScore,quizTotal);
-    disableButton(btn);
-    disableButton(document.getElementById("display-kumpulkan-modal"))
+    btn.disabled = true;
+    btn.style.backgroundColor ='gray';
+    btn.style.color ='white';
+
+    // set input hidden grade value
+    document.getElementById("student-grade").value = (totalScore/quizTotal)*100;
+
     // reset total score
     totalScore = 0;
-
-    // display correct answer to student
-    var displayedAnwer = document.getElementsByClassName("correct-answer");
-    for (let k = 0; k < displayedAnwer.length; k++) {
-      displayedAnwer[k].style.display = "block";
-    }
-  }
 }
 
-function showScore(totalScore,quizTotal) {
+
+function showScore(quizTotal) {
+
   if ((totalScore/quizTotal) < 0.7) {
     playSound('audio/fail.mp3');
     Swal.fire({
@@ -83,15 +82,15 @@ function showScore(totalScore,quizTotal) {
       imageAlt: 'happy'
     })
   }
+
+  // display correct answer to student
+  var displayedAnwer = document.getElementsByClassName("correct-answer");
+  for (let k = 0; k < displayedAnwer.length; k++) {
+    displayedAnwer[k].style.display = "block";
+  }
 }
 
 function playSound(url) {
   const audio = new Audio(url);
   audio.play();
-}
-
-function disableButton(btn) {
-  btn.disabled = true;
-  btn.style.backgroundColor ='gray';
-  btn.style.color ='white';
 }
