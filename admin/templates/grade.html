@@ -1,0 +1,97 @@
+<?php
+
+  require_once(ADMIN_LIBRARY_PATH . '/matpel.php');
+  require_once(ADMIN_LIBRARY_PATH . '/topic.php');
+  require_once(ADMIN_LIBRARY_PATH . '/grade.php');
+
+  $matpel = new Matpel($database['host'],$database['username'],$database['password'],$database['name']);
+  $resultMatpel = $matpel->getMatpels();
+
+  $topic = new Topic($database['host'],$database['username'],$database['password'],$database['name']);
+  $resultTopic = $topic->getTopics();
+  $topicLength = $resultTopic->num_rows;
+
+  $grade = new Grade($database['host'],$database['username'],$database['password'],$database['name']);
+
+  if (isset($_POST['displayGrade'])) {
+    $matpelId = $_POST['matpelOption'];
+    $topicId = $_POST['topicOption'];
+
+    $resultQuiz = $quiz->getQuizByMatpelTopic($matpelId,$topicId);
+  }
+
+?>
+<div>
+
+    <center><h2>Daftar Nilai</h2></center>
+
+    <!-- button to select quiz to display by matpel and topic -->
+    <form action="" method="post">
+      <div class="row">
+        <div class="col-auto">
+          <select name="matpelOption" class="form-select form-sm" id="matpelOption"
+           onclick="setTopicOption(this,<?php echo $topicLength; ?>,'option')">
+            <?php if ($resultMatpel->num_rows > 0) { ?>
+              <?php while ($row = $resultMatpel->fetch_assoc()) { ?>
+                <?php if ($row['matpel_id'] == $matpelId) { ?>
+                  <option value="<?php echo $row['matpel_id']; ?>" selected><?php echo $row['name']; ?></option>
+                <?php } else { ?>
+                  <option value="<?php echo $row['matpel_id']; ?>"><?php echo $row['name']; ?></option>
+                <?php } ?>
+              <?php } ?>
+            <?php }?>
+          </select>
+        </div>
+        <div class="col-auto">
+          <select name="topicOption" class="form-select form-sm">
+            <?php if ($resultTopic->num_rows > 0) { ?>
+              <?php $counter = 1; ?>
+              <?php while ($row = $resultTopic->fetch_assoc()) { ?>
+                <?php if ($row['topic_id'] == $topicId) { ?>
+                  <option value="<?php echo $row['topic_id']; ?>" id="<?php echo 'option'.$counter; ?>"
+                    class="<?php echo 'option'.$row['matpel_id']; ?>" style="display: none" selected >
+                    <?php echo $row['topic_name']; ?>
+                  </option>
+                <?php } else { ?>
+                  <option value="<?php echo $row['topic_id']; ?>" id="<?php echo 'option'.$counter; ?>"
+                    class="<?php echo 'option'.$row['matpel_id']; ?>" style="display: none">
+                    <?php echo $row['topic_name']; ?>
+                  </option>
+                <?php } ?>
+                <?php $counter += 1; ?>
+              <?php } ?>
+            <?php }?>
+          </select>
+        </div>
+        <div class="col-auto">
+          <input type="submit" name="displayQuiz" class="btn btn-success" value="Tampilkan">
+        </div>
+      </div>
+    </form>
+
+    <!-- display grade list in a table -->
+    <table class="table table-bordered">
+      <thead class="table-primary">
+        <tr>
+          <th scope="col">#</th>
+          <th>Sub-Topik</th>
+          <th>Nama Siswa</th>
+          <th>Nomor Induk</th>
+          <th>Kelas</th>
+          <th>Nilai</th>
+          <th>Tindakan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php if (!isset($_POST['displayQuiz'])) { ?>
+          <tr>
+            <td colspan="7">Silahkan pilih mata pelajaran dan topik, kemudian tekan tombol tampilkan
+            untuk menampilkan daftar nilai</td>
+          </tr>
+        <?php } else { ?>
+
+        <?php } ?>
+      </tbody>
+    </table>
+
+</div>
