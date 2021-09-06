@@ -6,8 +6,14 @@
 
   $grade = new Grade($database['host'],$database['username'],$database['password'],$database['name']);
 
-  // redirect to quiz page
-  header("Location: ../../?content=quiz");
+  if (isset($_POST['delGrade'])) {
+    $gradeId = $_POST['delGradeId'];
+
+    $message = $grade->delGrade($gradeId);
+  }
+
+  // redirect to grade page
+  header("Location: ../?content=grade");
   die;
 
 ?>

@@ -38,6 +38,17 @@ class Grade
 
     return $result;
   }
+
+  // database handler to delete selected grade
+  public function delGrade($gradeId) {
+    $sql = "DELETE FROM grade WHERE grade_id = '".$gradeId."'";
+
+    if ($this->conn->query($sql) == TRUE) {
+      return "Berhasil menghapus nilai!";
+    }
+    return FALSE;
+  }
+
 }
 
 ?>

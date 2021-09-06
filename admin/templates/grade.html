@@ -30,7 +30,7 @@
 
     <center><h2>Daftar Nilai</h2></center>
 
-    <!-- button to select quiz to display by matpel and topic -->
+    <!-- button to select grade to display by matpel and topic -->
     <form action="" method="post">
       <div class="row">
         <div class="col-auto">
@@ -105,9 +105,13 @@
                 <td><?php echo $row['student_class']; ?></td>
                 <td><?php echo $row['grade']; ?></td>
                 <td>
-                  <!-- delete quiz button -->
-                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-grade"
-                  onclick="">Hapus</button>
+                  <!-- delete grade button -->
+                  <form action="../admin/library/gradeAction.php" method="post">
+                    <input type="hidden" name="delGradeId" value="<?php echo $row['grade_id']; ?>">
+                    <input type="submit" name="delGrade" id="delGrade" class="btn btn-danger"
+                     data-toggle="tooltip" data-placement="top" value="Hapus"
+                     title="Hapus akan menghapus langsung tanpa konfirmasi">
+                  </form>
                 </td>
               </tr>
               <?php $counter++; ?>
@@ -122,8 +126,3 @@
     </table>
 
 </div>
-
-<form class="" action="" method="post">
-  <input type="hidden" name="grade-id">
-
-</form>
