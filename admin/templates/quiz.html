@@ -125,10 +125,10 @@
             <td><?php echo $row['answer']; ?></td>
             <td>
               <!-- update quiz button -->
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update-quiz"
+              <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#update-quiz"
               onclick="passId(<?php echo $row['quiz_id']; ?>, 'updateQuizId')">Ubah</button>
               <!-- delete quiz button -->
-              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-quiz"
+              <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete-quiz"
               onclick="passId(<?php echo $row['quiz_id']; ?>, 'delQuizId')">Hapus</button>
             </td>
           </tr>
