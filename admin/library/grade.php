@@ -28,6 +28,16 @@ class Grade
     }
     return FALSE;
   }
+
+  // database handler to get grade by matpel and topic
+  public function getGradeByMatpelTopic($matpelId,$topicId) {
+    $sql = "SELECT * FROM grade
+            WHERE matpel_id = '".$matpelId."'
+            AND topic_id = '".$topicId."'";
+    $result = $this->conn->query($sql);
+
+    return $result;
+  }
 }
 
 ?>
