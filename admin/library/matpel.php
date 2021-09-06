@@ -23,6 +23,14 @@ class Matpel
     return $result;
   }
 
+  // database handler to get active matpel
+  public function getMatpelActive() {
+    $sql = "SELECT * FROM matpel WHERE active = '1'";
+    $result = $this->conn->query($sql);
+
+    return $result;
+  }
+
   // database handler to select matpel by id
   public function selectMatpelById($matpelId) {
     $sql = "SELECT name FROM matpel WHERE matpel_id = '".$matpelId."'";
