@@ -39,6 +39,17 @@ class Grade
     return $result;
   }
 
+  // database handler to get grade by matpel, student id and topic
+  public function getGradeByMatpelTopicStudentId($matpelId,$topicId,$studentId) {
+    $sql = "SELECT * FROM grade
+            WHERE matpel_id = '".$matpelId."'
+            AND student_id = '".$studentId."'
+            AND topic_id = '".$topicId."'";
+    $result = $this->conn->query($sql);
+
+    return $result;
+  }
+
   // database handler to delete selected grade
   public function delGrade($gradeId) {
     $sql = "DELETE FROM grade WHERE grade_id = '".$gradeId."'";

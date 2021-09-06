@@ -1,5 +1,6 @@
 <?php
 
+require_once(ADMIN_LIBRARY_PATH . '/grade.php');
 require_once(ADMIN_LIBRARY_PATH . '/materi.php');
 
 $materiId = $_GET['materi_id'];
@@ -12,6 +13,10 @@ $subTopic = $_row['sub_topic'];
 $matpelId = $_row['matpel_id'];
 $topicId = $_row['topic_id'];
 $studentId = $_GET['student_id'];
+
+/* action if there is a submit to add grade */
+$grade = new Grade($database['host'],$database['username'],$database['password'],$database['name']);
+$resultGrade = $grade->getGradeByMatpelTopicStudentId($matpelId,$topicId,$studentId);
 
 ?>
 
@@ -27,8 +32,23 @@ $studentId = $_GET['student_id'];
   <h6><?php echo $subTopic; ?></h6>
 
   <div class="quiz-content">
-    <h4>Nama         : </h4>
-    <h4>Nomor Induk  : </h4>
-    <h4>Nilai        : </h4>
+    <?php $row = $resultGrade->fetch_assoc(); ?>
+    <table class="table table-bordered">
+      <thead class="table-primary">
+        <tr>
+          <th>Nama</th>
+          <th>Nomor Induk</th>
+          <th>Nilai</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><?php echo $row['student_name']; ?></td>
+          <td><?php echo $row['student_id']; ?></td>
+          <td><?php echo $row['grade']; ?></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+
 </div>
