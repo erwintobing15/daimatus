@@ -15,26 +15,6 @@
   $quiz = new Quiz($database['host'],$database['username'],$database['password'],$database['name']);
   $resultQuiz = $quiz->getQuizBySubTopic($subTopic);
   $quizTotal = $resultQuiz->num_rows;
-
-  /* action if there is a submit to add grade */
-  $grade = new Grade($database['host'],$database['username'],$database['password'],$database['name']);
-  if (isset($_POST['addGrade'])) {
-
-    $subTopic = $_POST['sub-topic'];
-    $matpelId = $_POST['matpel-id'];
-    $topicId = $_POST['topic-id'];
-
-    $studentName = $_POST['student-name'];
-    $studentId = $_POST['student-id'];
-    $studentClass = $_POST['student-class'];
-    $studentGrade = $_POST['student-grade'];
-
-    $message = $grade->addGrade($subTopic,$studentName,$studentId,$studentClass,
-                                $studentGrade,$matpelId,$topicId);
-
-    header("Location: ?content=quizresult&materi_id=$materiId&student_id=$studentId");
-    die;
-  }
 ?>
 <div class="container" style="margin-top: 110px;">
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -46,14 +26,6 @@
   </nav>
 
   <h6><?php echo $subTopic; ?></h6>
-
-  <?php if (isset($studentGrade)) { ?>
-    <div class="quiz-content">
-      <h4>Nama         : <?php echo $studentName; ?></h4>
-      <h4>Nomor Induk  : <?php echo $studentId; ?></h4>
-      <h4>Nilai        : <?php echo $studentGrade; ?></h4>
-    </div>
-  <?php } ?>
 
   <?php
     $selectedAnswerList = array();
@@ -141,8 +113,9 @@ style="display: none;" aria-hidden="true">
         <h5 class="modal-title" id="kumpulkanLabel">Form Pengumpulan Kuis</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="" method="post">
+      <form action="admin/library/gradeAction.php" method="post">
         <input type="hidden" name="student-grade" id="student-grade">
+        <input type="hidden" name="materi-id" value="<?php echo $_GET['materi_id']; ?>">
         <input type="hidden" name="sub-topic" value="<?php echo $_row['sub_topic']; ?>">
         <input type="hidden" name="matpel-id" value="<?php echo $_row['matpel_id']; ?>">
         <input type="hidden" name="topic-id" value="<?php echo $_row['topic_id']; ?>">
