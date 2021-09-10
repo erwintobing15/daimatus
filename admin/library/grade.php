@@ -60,15 +60,15 @@ class Grade
     return FALSE;
   }
 
-    // database handler to delete grades by 
-    public function delGradeBySubTopic($subTopic) {
-      $sql = "DELETE FROM grade WHERE sub_topic = '".$subTopic."'";
-  
-      if ($this->conn->query($sql) == TRUE) {
-        return "Berhasil menghapus nilai!";
-      }
-      return FALSE;
+  // database handler to delete grades by 
+  public function delGradeBySubTopic($subTopic) {
+    $sql = "DELETE FROM grade WHERE sub_topic = '".$subTopic."'";
+
+    if ($this->conn->query($sql) == TRUE) {
+      return "Berhasil menghapus nilai!";
     }
+    return FALSE;
+  }
 
 }
 
