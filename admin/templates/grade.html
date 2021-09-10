@@ -25,6 +25,13 @@
     $resultGrade = $grade->getGradeByMatpelTopic($matpelId,$topicId);
   }
 
+  if (isset($_POST['delGradesByMatpelTopic'])) {
+    $matpelId = $_POST['matpelOption'];
+    $topicId = $_POST['topicOption'];
+
+    $message = $grade->delGradesByMatpelTopic($matpelId,$topicId);
+  }
+
 ?>
 <div>
 
@@ -75,7 +82,8 @@
         <!-- delete grades by matpel and topic -->
         <div class="col-auto">
           <input type="submit" name="delGradesByMatpelTopic" class="btn btn-danger" 
-          value="Hapus Semua">
+          value="Hapus Semua" data-toggle="tooltip" data-placement="top" 
+          title="Hapus Semua akan menghapus semua nilai secara langsung tanpa konfirmasi">
         </div>
       </div>
     </form>

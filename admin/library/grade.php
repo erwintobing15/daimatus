@@ -70,6 +70,18 @@ class Grade
     return FALSE;
   }
 
+  // database handler to delete grades by 
+  public function delGradesByMatpelTopic($matpelId,$topicId) {
+    $sql = "DELETE FROM grade 
+            WHERE matpel_id = '".$matpelId."'
+            AND topic_id = '".$topicId."'";
+
+    if ($this->conn->query($sql) == TRUE) {
+      return "Berhasil menghapus nilai!";
+    }
+    return FALSE;
+  }
+
 }
 
 ?>
