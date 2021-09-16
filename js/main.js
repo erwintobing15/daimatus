@@ -25,44 +25,36 @@ $(document).ready(function(){
 var totalScore = 0;
 function checkScore(btn,quizTotal,choice,answer) {
 
-  var studentName =document.getElementById("student-name").value;
-  var studentId =document.getElementById("student-id").value;
-  var studentClass =document.getElementById("student-class").value;
+  for (let i = 1; i <= quizTotal; i++) {
+    var elName = choice + i;
 
+    var choices = document.getElementsByName(elName);
+    var selectedChoice;
 
-    for (let i = 1; i <= quizTotal; i++) {
-      var elName = choice + i;
-
-      var choices = document.getElementsByName(elName);
-      var selectedChoice;
-
-      for (let j = 0; j < choices.length; j++) {
-        if (choices[j].checked) {
-          selectedChoice = choices[j].id;
-        }
-        choices[j].disabled = "true";
+    for (let j = 0; j < choices.length; j++) {
+      if (choices[j].checked) {
+        selectedChoice = choices[j].id;
       }
-
-      var correctAnswer = elName + "-" + document.getElementById(answer+i).value;
-
-      if (selectedChoice == correctAnswer)
-        totalScore += 1;
+      choices[j].disabled = "true";
     }
 
-    btn.disabled = true;
-    btn.style.backgroundColor ='gray';
-    btn.style.color ='white';
+    var correctAnswer = elName + "-" + document.getElementById(answer+i).value;
 
-    // set input hidden grade value
-    document.getElementById("student-grade").value = (totalScore/quizTotal)*100;
+    if (selectedChoice == correctAnswer)
+      totalScore += 1;
+  }
 
-    // reset total score
-    totalScore = 0;
+  showScore(totalScore,quizTotal);
+
+  totalScore = 0;
+
+  // disable button so user can only pick anwer once
+  btn.disabled = true;
+  btn.style.backgroundColor ='gray';
+  btn.style.color ='white';
 }
 
-
-function showScore(quizTotal) {
-
+function showScore(totalScore,quizTotal) {
   if ((totalScore/quizTotal) < 0.7) {
     playSound('audio/fail.mp3');
     Swal.fire({
@@ -81,12 +73,6 @@ function showScore(quizTotal) {
       imageHeight: 125,
       imageAlt: 'happy'
     })
-  }
-
-  // display correct answer to student
-  var displayedAnwer = document.getElementsByClassName("correct-answer");
-  for (let k = 0; k < displayedAnwer.length; k++) {
-    displayedAnwer[k].style.display = "block";
   }
 }
 
