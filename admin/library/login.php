@@ -26,7 +26,7 @@
     header("Location: ../index.php");
   }
   else {
-    header("Location: ../login.html");
+    header("Location: ../loginfailed.html");
   }
 
 ?>
