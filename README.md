@@ -2,9 +2,28 @@
 
 ![Logo](images/logo.png)
 
-## Intro
+## Introduction
 
-> This is a fullstack web used as online learning platform for fourth grade student. This web has client side for student to watch learning materials and do quiz. The admin web for teacher used for customize learning material and quizzes. This web built using php native, html, css, and js.
+> This is a fullstack web used as online learning platform for fourth grade student. This web has client side for student to watch learning materials and do quiz. The admin web for teacher used for customize learning materials and quizzes. This web built using php native, html, css, and js.
+
+## Demo
+Check out the working live demo [here](https://daimatus.000webhostapp.com/)
+
+## Web Screenshoot
+<p float="left">
+  <img src="../assets/home_web.png" width="100" />
+  <img src="../assets/materi_web.png" width="100" /> 
+</p>
+
+## Mobile Screenshoot
+The client site for students is compatible with mobile devices of all sizes.
+<table>
+    <tr>
+        <td valign="top"><img src="../assets/home_mobile.jpg"></td>
+        <td valign="top"><img src="../assets/materi_mobile.jpg"></td>
+        <td valign="top"><img src="../assets/topic_mobile.jpg"></td>
+    </tr>
+</table>
 
 ## Technologies 
 * PHP 8.0.3
@@ -23,8 +42,20 @@ Run this project using locally xampp:
 * Open xampp, start apache and mysql and then open phpmyadmin 
 * Clone or download daimatus and move it to htdocs directory on xampp
 * On phpmyadmin create new database and name it daimatus
-* Klik import > choose file and the choose file daimatus.sql from daimatus website in htdocs directory
+* Klik import and choose file daimatus.sql from daimatus website in htdocs directory
 * Open browser and go to link localhost/daimatus
-* To open admin web got to localhost/daimatus/admin and login with username and password :
-  username : daimatus-admin
-  password : daimatus-admin    
+* To open admin web got to localhost/daimatus/admin and login with username : daimatus-admin and password : daimatus-admin
+
+## Features
+Client site :
+* Watch video materials
+* Do quiz and submit it
+
+Admin site :
+* Customizing materials including topic, sub topic, materials picture, and materials video 
+* Customizing quizzes per materials
+* Configure admin user
+
+## License
+This project is licensed under the terms of the MIT license.
+
