@@ -10,18 +10,9 @@
 Check out the working live demo [here](https://daimatus.000webhostapp.com/)
 
 ## Web Screenshoot
+![Home](../assets/home_web.PNG)
+![Materi](../assets/materi_web.PNG)
 
-<p float="left">
-  <img src="../assets/home_web.PNG" width="100" />
-  <img src="../assets/materi_web.PNG" width="100" /> 
-</p>
-
-<table>
-    <tr>
-        <td valign="top"><img src="../assets/home_web.PNG"></td>
-        <td valign="top"><img src="../assets/materi_web.PNG"></td>
-    </tr>
-</table>
 
 ## Mobile Screenshoot
 The client site for students is compatible with mobile devices of all sizes.
