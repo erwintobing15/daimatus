@@ -56,5 +56,5 @@ Admin site :
 * Configure admin user
 
 ## License
-This project is licensed under the terms of the MIT license.
+This project is licensed under the terms of the [MIT license](https://github.com/erwintobing15/daimatus/blob/main/LICENSE).
 
