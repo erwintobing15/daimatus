@@ -36,8 +36,10 @@
     defined ('ADMIN_TEMPLATES_PATH')
       or define('ADMIN_TEMPLATES_PATH', realpath(dirname(__FILE__) . '/admin/templates'));
 
-    defined ('ADMIN_LIBRARY_PATH')
-      or define('ADMIN_LIBRARY_PATH', realpath(dirname(__FILE__) . '/admin/library'));
+    defined ('ADMIN_ACTION_PATH')
+      or define('ADMIN_ACTION_PATH', realpath(dirname(__FILE__) . '/admin/action'));
 
+    defined ('ADMIN_MODEL_PATH')
+      or define('ADMIN_MODEL_PATH', realpath(dirname(__FILE__) . '/admin/model'));
 
 ?>
