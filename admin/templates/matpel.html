@@ -1,5 +1,5 @@
 <?php
-  require_once(ADMIN_LIBRARY_PATH . '/matpel.php');
+  require_once(ADMIN_MODEL_PATH . '/matpel.php');
 
   $matpel = new Matpel($database['host'],$database['username'],$database['password'],$database['name']);
 
@@ -71,7 +71,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="../admin/library/matpelAction.php" method="post" enctype="multipart/form-data">
+        <form action="../admin/action/matpelAction.php" method="post" enctype="multipart/form-data">
           <div class="mb-3">
             <label for="name-add" class="col-form-label">Mata Pelajaran:</label>
             <input type="text" class="form-control" id="name-add" name="name-add" value="" required>
@@ -103,7 +103,7 @@
   </div>
 </div>
 <!-- update matpel modal -->
-<form action="../admin/library/matpelAction.php" method="post" enctype="multipart/form-data">
+<form action="../admin/action/matpelAction.php" method="post" enctype="multipart/form-data">
   <input type="hidden" name="matpelId" id="matpelId">
   <div class="modal fade" id="update-matpel" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -144,7 +144,7 @@
   </div>
 </form>
 <!-- delete matpel modal -->
-<form action="../admin/library/matpelAction.php" method="post">
+<form action="../admin/action/matpelAction.php" method="post">
   <input type="hidden" name="_matpelId" id="_matpelId">
   <div class="modal fade" id="delete-matpel" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
     <div class="modal-dialog">

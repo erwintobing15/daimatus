@@ -1,7 +1,7 @@
 <?php
-  require_once(ADMIN_LIBRARY_PATH . '/materi.php');
-  require_once(ADMIN_LIBRARY_PATH . '/quiz.php');
-  require_once(ADMIN_LIBRARY_PATH . '/grade.php');
+  require_once(ADMIN_MODEL_PATH . '/materi.php');
+  require_once(ADMIN_MODEL_PATH . '/quiz.php');
+  require_once(ADMIN_MODEL_PATH . '/grade.php');
 
   $materiId = $_GET['materi_id'];
   $materi = new Materi($database['host'],$database['username'],$database['password'],$database['name']);
@@ -113,7 +113,7 @@ style="display: none;" aria-hidden="true">
         <h5 class="modal-title" id="kumpulkanLabel">Form Pengumpulan Kuis</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="admin/library/gradeAction.php" method="post">
+      <form action="admin/action/gradeAction.php" method="post">
         <input type="hidden" name="student-grade" id="student-grade">
         <input type="hidden" name="materi-id" value="<?php echo $_GET['materi_id']; ?>">
         <input type="hidden" name="sub-topic" value="<?php echo $_row['sub_topic']; ?>">

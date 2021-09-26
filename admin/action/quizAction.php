@@ -1,7 +1,7 @@
 <?php
 require_once('../../config.php');
 require_once '../../connection.php';
-require_once(ADMIN_LIBRARY_PATH . '/quiz.php');
+require_once(ADMIN_MODEL_PATH . '/quiz.php');
 
 $quiz = new Quiz($database['host'],$database['username'],$database['password'],$database['name']);
 

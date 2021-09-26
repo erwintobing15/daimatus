@@ -1,7 +1,7 @@
 <?php
-  require_once(ADMIN_LIBRARY_PATH . '/matpel.php');
-  require_once(ADMIN_LIBRARY_PATH . '/topic.php');
-  require_once(ADMIN_LIBRARY_PATH . '/materi.php');
+  require_once(ADMIN_MODEL_PATH . '/matpel.php');
+  require_once(ADMIN_MODEL_PATH . '/topic.php');
+  require_once(ADMIN_MODEL_PATH . '/materi.php');
 
   $matpel = new Matpel($database['host'],$database['username'],$database['password'],$database['name']);
   $matpelId = $_GET['matpel'];

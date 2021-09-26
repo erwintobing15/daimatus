@@ -1,5 +1,5 @@
 <?php
-  require_once(ADMIN_LIBRARY_PATH . '/materi.php');
+  require_once(ADMIN_MODEL_PATH . '/materi.php');
 
   $materiId = $_GET['materi_id'];
   $materi = new Materi($database['host'],$database['username'],$database['password'],$database['name']);

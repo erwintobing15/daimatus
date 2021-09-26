@@ -2,7 +2,7 @@
 
   require_once('../../config.php');
   require_once '../../connection.php';
-  require_once(ADMIN_LIBRARY_PATH . '/user.php');
+  require_once(ADMIN_MODEL_PATH . '/user.php');
 
   $user = new User($database['host'],$database['username'],$database['password'],$database['name']);
 

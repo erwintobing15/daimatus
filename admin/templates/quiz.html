@@ -1,8 +1,8 @@
 <?php
-  require_once(ADMIN_LIBRARY_PATH . '/matpel.php');
-  require_once(ADMIN_LIBRARY_PATH . '/topic.php');
-  require_once(ADMIN_LIBRARY_PATH . '/materi.php');
-  require_once(ADMIN_LIBRARY_PATH . '/quiz.php');
+  require_once(ADMIN_MODEL_PATH . '/matpel.php');
+  require_once(ADMIN_MODEL_PATH . '/topic.php');
+  require_once(ADMIN_MODEL_PATH . '/materi.php');
+  require_once(ADMIN_MODEL_PATH . '/quiz.php');
 
   $matpel = new Matpel($database['host'],$database['username'],$database['password'],$database['name']);
   $resultMatpel = $matpel->getMatpels();
@@ -154,7 +154,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="../admin/library/quizAction.php" method="post" enctype="multipart/form-data">
+        <form action="../admin/action/quizAction.php" method="post" enctype="multipart/form-data">
           <div class="mb-3">
             <label for="matpel-add" class="col-form-label">Mata pelajaran:</label>
             <select name="matpel-add" id="matpel-add" class="form-select" aria-label=".form-select-sm example"
@@ -253,7 +253,7 @@
 </div>
 
 <!-- update quiz modal -->
-<form action="../admin/library/quizAction.php" method="post" enctype="multipart/form-data">
+<form action="../admin/action/quizAction.php" method="post" enctype="multipart/form-data">
   <input type="hidden" id="updateQuizId" name="updateQuizId">
   <div class="modal fade" id="update-quiz" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -305,7 +305,7 @@
 </form>
 
 <!-- delete quiz modal -->
-<form action="../admin/library/quizAction.php" method="post">
+<form action="../admin/action/quizAction.php" method="post">
   <input type="hidden" name="delQuizId" id="delQuizId">
   <div class="modal fade" id="delete-quiz" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">

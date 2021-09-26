@@ -2,7 +2,7 @@
 
   require_once('../../config.php');
   require_once '../../connection.php';
-  require_once(ADMIN_LIBRARY_PATH . '/grade.php');
+  require_once(ADMIN_MODEL_PATH . '/grade.php');
 
   $grade = new Grade($database['host'],$database['username'],$database['password'],$database['name']);
 

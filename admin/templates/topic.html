@@ -1,6 +1,6 @@
 <?php
-  require_once(ADMIN_LIBRARY_PATH . '/matpel.php');
-  require_once(ADMIN_LIBRARY_PATH . '/topic.php');
+  require_once(ADMIN_MODEL_PATH . '/matpel.php');
+  require_once(ADMIN_MODEL_PATH . '/topic.php');
 
   $matpel = new Matpel($database['host'],$database['username'],$database['password'],$database['name']);
   $resultMatpel = $matpel->getMatpels();
@@ -86,7 +86,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="../admin/library/topicAction.php" method="post">
+        <form action="../admin/action/topicAction.php" method="post">
           <div class="mb-3">
             <label for="matpel-add" class="col-form-label">Mata pelajaran:</label>
             <select name="matpel-add" id="matpel-add" class="form-select" aria-label=".form-select-sm example">
@@ -117,7 +117,7 @@
 </div>
 
 <!-- update topic modal -->
-<form action="../admin/library/topicAction.php" method="post">
+<form action="../admin/action/topicAction.php" method="post">
   <input type="hidden" name="updateTopicId" id="updateTopicId">
   <div class="modal fade" id="update-topic" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -141,7 +141,7 @@
   </div>
 </form>
 <!-- delete  topic modal -->
-<form action="../admin/library/topicAction.php" method="post">
+<form action="../admin/action/topicAction.php" method="post">
   <input type="hidden" name="delTopicId" id="delTopicId">
   <div class="modal fade" id="delete-topic" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">

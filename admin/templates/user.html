@@ -1,5 +1,5 @@
 <?php
-  require_once(ADMIN_LIBRARY_PATH . '/user.php');
+  require_once(ADMIN_MODEL_PATH . '/user.php');
 
   $user = new User($database['host'],$database['username'],$database['password'],$database['name']);
 
@@ -64,7 +64,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="../admin/library/userAction.php" method="post">
+        <form action="../admin/action/userAction.php" method="post">
           <div class="mb-3">
             <label for="username-add" class="col-form-label">Username:</label>
             <input type="text" class="form-control" id="username-add" name="username-add" value="" required>
@@ -90,7 +90,7 @@
   </div>
 </div>
 <!-- update and delete user modal -->
-<form  action="../admin/library/userAction.php" method="post">
+<form  action="../admin/action/userAction.php" method="post">
   <!-- pass user id to input userId using javascript -->
   <input type="hidden" id="userId" name="userId"/>
   <!-- Update user -->

@@ -2,7 +2,7 @@
 
 require_once('../../config.php');
 require_once '../../connection.php';
-require_once(ADMIN_LIBRARY_PATH . '/matpel.php');
+require_once(ADMIN_MODEL_PATH . '/matpel.php');
 
 $matpel = new Matpel($database['host'],$database['username'],$database['password'],$database['name']);
 
