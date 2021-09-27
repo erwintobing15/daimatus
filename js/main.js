@@ -80,3 +80,49 @@ function playSound(url) {
   const audio = new Audio(url);
   audio.play();
 }
+
+const checkAnswer = (btn, choiceName, answ) => {
+
+  // get selected choice
+  let choices = document.getElementsByName(choiceName);
+  let selectedChoice;
+
+  for (let i = 0; i < choices.length; i++) {
+    if (choices[i].checked) {
+      selectedChoice = choices[i].id;
+    }
+    choices[i].disabled = "true";
+  }
+  console.log(selectedChoice);
+
+  // get asnwer
+  let answer = choiceName + "-" + answ;
+  console.log(answer);
+
+  // checking if selected choice is correct
+  if (selectedChoice == answer) {
+    playSound('audio/correct.mp3');
+    Swal.fire({
+      title: 'Benar',
+      text: 'Jawaban kamu sudah tepat',
+      imageUrl: 'images/icon/correct.png',
+      imageHeight: 125,
+      imageAlt: 'correct'
+    })
+  }
+  else {
+    playSound('audio/wrong.mp3');
+    Swal.fire({
+      title: 'Salah',
+      text: 'Jawaban kamu masih kurang tepat nih',
+      imageUrl: 'images/icon/wrong.png',
+      imageHeight: 125,
+      imageAlt: 'wrong'
+    })
+  }
+
+  // disable button so user can only pick anwer once
+  btn.disabled = true;
+  btn.style.backgroundColor ='gray';
+  btn.style.color ='white';
+}
