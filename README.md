@@ -11,7 +11,16 @@ Check out the working live demo [here](https://daimatus.000webhostapp.com/)
 
 ## Web Screenshoot
 ![Home](../assets/home_web.PNG)
+
 ![Materi](../assets/materi_web.PNG)
+
+![Video](../assets/video_web.PNG)
+
+![Kui](../assets/kuis_web.PNG)
+
+![Admin Matpel](../assets/admin_matpel.PNG)
+
+![Admin Kuis](../assets/admin_kuis.PNG)
 
 
 ## Mobile Screenshoot
@@ -21,6 +30,11 @@ The client site for students is compatible with mobile devices of all sizes.
         <td valign="top"><img src="../assets/home_mobile.jpg"></td>
         <td valign="top"><img src="../assets/materi_mobile.jpg"></td>
         <td valign="top"><img src="../assets/topic_mobile.jpg"></td>
+    </tr>
+    <tr>
+        <td valign="top"><img src="../assets/video_mobile.jpg"></td>
+        <td valign="top"><img src="../assets/kuis_mobile.jpg"></td>
+        <td valign="top"><img src="../assets/check_answer.jpg"></td>
     </tr>
 </table>
 
