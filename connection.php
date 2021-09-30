@@ -20,10 +20,12 @@
 
           $this->conn = new mysqli($this->DB_HOST, $this->DB_USERNAME, $this->DB_PASSWORD, $this->DB_NAME);
           if (mysqli_connect_errno()) {
-              echo "Gagal Koneksi ke Database: " . mysqli_connect_error();
+            echo "Gagal Koneksi ke Database: " . mysqli_connect_error();
+            return FALSE;
           }
-
-  	    return $this->conn;
+          else {
+            return $this->conn;
+          }
   	}
   }
 
