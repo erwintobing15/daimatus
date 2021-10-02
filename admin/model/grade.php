@@ -29,6 +29,14 @@ class Grade
     return FALSE;
   }
 
+    // database handler to get all grades
+    public function getGrades() {
+      $sql = "SELECT * FROM grade";
+      $result = $this->conn->query($sql);
+  
+      return $result;
+    }
+
   // database handler to get grade by matpel and topic
   public function getGradeByMatpelTopic($matpelId,$topicId) {
     $sql = "SELECT * FROM grade
