@@ -56,48 +56,27 @@
       </tr>
     </thead>
     <tbody>
-      <?php if (!isset($_POST['displayTopic'])) { ?>
-        <?php if ($resultTopic->num_rows > 0) { ?>
-          <?php $counter = 1; ?>
-          <?php while ($row = $resultTopic->fetch_assoc()) { ?>
-            <tr>
-              <td scope="row"><?php echo $counter; ?></td>
-              <td><?php echo $row['topic_name']; ?></td>
-              <td>
-                <!-- update topic button -->
-                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"data-bs-target="#update-topic"
-                onclick="passId(<?php echo $row['topic_id']; ?>, 'updateTopicId')">Ubah</button>
-                <!-- delete topic button -->
-                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"data-bs-target="#delete-topic"
-                onclick="passId(<?php echo $row['topic_id']; ?>, 'delTopicId')">Hapus</button>
-              </td>
-            </tr>
-          <?php $counter++; ?>
-          <?php } ?>
-        <?php } ?>
-      <?php } else { ?>
-        <?php if ($resultTopic->num_rows > 0) { ?>
-          <?php $counter = 1; ?>
-          <?php while ($row = $resultTopic->fetch_assoc()) { ?>
-            <tr>
-              <td scope="row"><?php echo $counter; ?></td>
-              <td><?php echo $row['topic_name']; ?></td>
-              <td>
-                <!-- update topic button -->
-                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"data-bs-target="#update-topic"
-                onclick="passId(<?php echo $row['topic_id']; ?>, 'updateTopicId')">Ubah</button>
-                <!-- delete topic button -->
-                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"data-bs-target="#delete-topic"
-                onclick="passId(<?php echo $row['topic_id']; ?>, 'delTopicId')">Hapus</button>
-              </td>
-            </tr>
-            <?php $counter += 1; ?>
-          <?php } ?>
-        <?php } else {?>
+      <?php if ($resultTopic->num_rows > 0) { ?>
+        <?php $counter = 1; ?>
+        <?php while ($row = $resultTopic->fetch_assoc()) { ?>
           <tr>
-            <td colspan="3">Topik untuk mata pelajaran yang dipilih masih kosong</td>
+            <td scope="row"><?php echo $counter; ?></td>
+            <td><?php echo $row['topic_name']; ?></td>
+            <td>
+              <!-- update topic button -->
+              <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"data-bs-target="#update-topic"
+              onclick="passId(<?php echo $row['topic_id']; ?>, 'updateTopicId')">Ubah</button>
+              <!-- delete topic button -->
+              <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"data-bs-target="#delete-topic"
+              onclick="passId(<?php echo $row['topic_id']; ?>, 'delTopicId')">Hapus</button>
+            </td>
           </tr>
+          <?php $counter += 1; ?>
         <?php } ?>
+      <?php } else {?>
+        <tr>
+          <td colspan="3">Topik untuk mata pelajaran yang dipilih masih kosong</td>
+        </tr>
       <?php } ?>
     </tbody>
   </table>
