@@ -7,7 +7,7 @@
 > This is a fullstack web used as online learning platform for fourth grade student. This web has client side for student to watch learning materials and do quiz. The admin web for teacher used for customize learning materials and quizzes. This web built using php native, html, css, and js.
 
 ## Demo
-Check out the working live demo [here](https://daimatus.000webhostapp.com/)
+Check out the working live demo [client-site](https://daimatus.000webhostapp.com/) and [admin-site](https://daimatus.000webhostapp.com/)) with username : daimatus-admin and pass: daimatus-admin.
 
 ## Web Screenshoot
 ![Home](../assets/home_web.PNG)
@@ -61,13 +61,18 @@ Run this project using locally xampp:
 
 ## Features
 Client site :
-* Watch video materials
-* Do quiz and submit it
+* List of all subjects 
+* Every subject have a list of topic material 
+* Students can watch video material on a topic 
+* Students can do a quiz on a topic, submit the quiz, and get the grade
 
 Admin site :
-* Customizing materials including topic, sub topic, materials picture, and materials video 
-* Customizing quizzes per materials
-* Configure admin user
+* can log in to an existing admin account, create a new account, or update the account
+* Ability to upload, update, and delete subject, topic, subtopic, and logo of a subject
+* Ability to upload, update, and delete video materials
+* Ability to upload, update, and delete quiz material
+* monitor students quizzes grade
+* can display or hide a subject
 
 ## License
 This project is licensed under the terms of the [MIT license](https://github.com/erwintobing15/daimatus/blob/main/LICENSE).
