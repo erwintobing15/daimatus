@@ -38,7 +38,7 @@ The client site for students is compatible with mobile devices of all sizes.
     </tr>
 </table>
 
-## Technologies 
+## Technologies
 * PHP 8.0.3
 * HTML 5
 * CSS
@@ -52,7 +52,7 @@ The client site for students is compatible with mobile devices of all sizes.
 ## Setup
 Run this project using locally xampp:
 
-* Open xampp, start apache and mysql and then open phpmyadmin 
+* Open xampp, start apache and mysql and then open phpmyadmin
 * Clone or download daimatus and move it to htdocs directory on xampp
 * On phpmyadmin create new database and name it daimatus
 * Klik import and choose file daimatus.sql from daimatus website in htdocs directory
@@ -61,10 +61,11 @@ Run this project using locally xampp:
 
 ## Features
 Client site :
-* List of all subjects 
-* Every subject have a list of topic material 
-* Students can watch video material on a topic 
+* List of all subjects
+* Every subject have a list of topic material
+* Students can watch video material on a topic
 * Students can do a quiz on a topic, submit the quiz, and get the grade
+* can display cute emoticon and play audio for a correct or wrong answer on quiz
 
 Admin site :
 * can log in to an existing admin account, create a new account, or update the account
@@ -76,4 +77,3 @@ Admin site :
 
 ## License
 This project is licensed under the terms of the [MIT license](https://github.com/erwintobing15/daimatus/blob/main/LICENSE).
-
