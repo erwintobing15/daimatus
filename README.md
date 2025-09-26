@@ -1,4 +1,4 @@
-# daimatus
+# DAIMATUS
 
 ![Logo](images/logo.png)
 
